@@ -28,11 +28,27 @@ body {
 
 }
 
+video {
+    width: 90%;
+    height: auto;
+  }
+
 h1,h2,h3,h4,h5{
 
     font-weight: 300;
 
 }
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+}
+
+.progress-bar {
+    position: relative;
+    display:flex;
+  }
 
 label{
 
