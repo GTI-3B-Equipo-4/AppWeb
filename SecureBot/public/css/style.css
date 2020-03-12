@@ -167,7 +167,13 @@ table tr th { color: #688a7e;}
   background-size: cover;
 
 }
+.imagen-login{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
 
+}
 .login-img2-body{
 
   background: url('../img/bg-1.jpg') no-repeat center center fixed;

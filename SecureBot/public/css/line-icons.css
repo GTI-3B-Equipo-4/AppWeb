@@ -40,6 +40,12 @@
 	height: 23px;
 	display: inline-block !important;
 }
+.icono-login{
+	background-image: url('../img/icons/robot.png') no-repeat ;
+	width: 24px;
+	height: 24px;
+	display: inline-block !important;
+}
 .icon-map-l {
 	background: url('../img/icons/line-icon.png') no-repeat -519px -134px;
 	width: 19px;
