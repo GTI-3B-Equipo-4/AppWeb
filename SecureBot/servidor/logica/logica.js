@@ -66,25 +66,50 @@ darDeAltaUsuario( datos ) {
     })
 } // ()
 
+buscarUsuario( usuario ){
+  var textoSQL = "select * from Usuarios where usuario = $usuario";
+  var valoresParaSQL = { $usuario: usuario}
+  return new Promise( ( resolver, rechazar ) => {
+    this.laConexion.all( textoSQL, valoresParaSQL,
+      ( err, res ) => {
+        if( res == undefined ){
+          resolver(false)
+          return
+        }        
+        resolver(res[0])
+      })
+    })
+}
+
 //----------------------------------------------------------------------
 // datos:JSON{usuario:Texto, password:Texto}
 // --> iniciarSesion() -->
 // V/F
 //----------------------------------------------------------------------
-iniciarSesion( datos ){
-  var textoSQL = "select * from Usuarios where usuario = $usuario and password = $password";
-  var valoresParaSQL = { $usuario: datos.usuario, $password: datos.password }
-  return new Promise( ( resolver, rechazar ) => {
-    this.laConexion.all( textoSQL, valoresParaSQL,
-      ( err, res ) => {
-        console.log(res);
-        if( res.length == 0 ){
-          resolver(false)
-        } else{
-          resolver(true)
-        }
-      })
-    })
+async iniciarSesion( datos ){
+
+  var usuario = await this.buscarUsuario(datos.usuario);
+
+  return new Promise((resolver, rechazar) =>{
+
+    if( !usuario ){
+      resolver(false)
+      console.log("No existe el usuario");
+      
+      return
+    } 
+
+    if( usuario.password != datos.password ){
+      console.log("La contraseña no coincide");
+      resolver(false)
+      return
+    }
+
+    resolver(true)
+    console.log("Credenciales correctas");
+    
+  })
+
 }
 
 // .................................................................

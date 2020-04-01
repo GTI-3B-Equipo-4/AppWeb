@@ -1,7 +1,8 @@
-class Logica {
+
+class LogicaFake {
 
   constructor( ){
-    console.log("Proxy creado");   
+    console.log("Proxy creado")
   }
 
   //----------------------------------------------------------------------
@@ -9,7 +10,7 @@ class Logica {
   // --> iniciarSesion() -->
   // V/F
   //----------------------------------------------------------------------
-  async iniciarSesion( datos, callback){
+  iniciarSesion( datos, callback){
 
     var myInit = { method: 'GET',
                    headers: {
@@ -18,12 +19,12 @@ class Logica {
                    mode: 'cors',
                    cache: 'default' };
 
-    fetch(this.ip+"/iniciarSesion", myInit)
+    fetch("http://192.168.56.1:8080"+"/iniciarSesion", myInit)
     .then((res)=>{
       return res.json();
     })
     .then((data)=>{
-      callback(res.laRespuesta)
+      callback(data.laRespuesta)
     })
 
   }

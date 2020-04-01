@@ -8,28 +8,30 @@ module.exports.cargar = function( servidorExpress, laLogica ) {
 // .......................................................
 // GET /iniciarSesion
 // .......................................................
-servidorExpress.get('/iniciarSesion',
+servidorExpress.post('/iniciarSesion',
    async function( peticion, respuesta ){
 
-    console.log( "GET /iniciarSesion" )
-
-    console.log(peticion.body);
+    console.log( "POST /iniciarSesion" )
   
     var datos = JSON.parse(peticion.body)
 
+    console.log(datos);
+    
     var res = await laLogica.iniciarSesion(datos);
+
+    console.log("Iniciar sesion: " + res);
 
     respuesta.send({laRespuesta: res})
 
 }) // get /iniciarSesion
 
+servidorExpress.get('/prueba',
+    function( peticion, respuesta ){
 
-servidorExpress.get(':archivo', function( peticion, respuesta ){
-    console.log( " servint html normal: " + peticion.params.archivo )
+    console.log("Funciona correctamente");
+    
 
-    var elPath = path.join(__dirname, '..', '..', 'public');
-    respuesta.sendFile( elPath + "/" +  peticion.params.archivo);
-});
+}) // get /iniciarSesion
 
 } // cargar()
 

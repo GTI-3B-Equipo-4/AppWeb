@@ -34,16 +34,22 @@ describe( "Test 1: insertar una persona", function() {
 // ....................................................
   it( "puedo insertar una persona",
   async function() {
-    await laLogica.darDeAltaUsuario({usuario: "Emilio", password:"1234"});
+    await laLogica.darDeAltaUsuario({usuario: "Emilio", password:"lul"});
   }) // it
 // ....................................................
 // ....................................................
-  it( "no puedo insertar una persona con dni que ya está",
+  it( "puedo iniciar sesion",
   async function() {
-    var res = await laLogica.iniciarSesion({usuario: "Emilio", password: "1234"});
-    console.log(res);
-    
+    var res = await laLogica.iniciarSesion({usuario: "Emilio", password: "lul"});
+    console.log("puedo iniciar sesion: " + res);
   }) // it
+// ....................................................
+// ....................................................
+it( "no puedo iniciar sesion",
+async function() {
+  var res = await laLogica.iniciarSesion({usuario: "Emilio", password: "1234"});
+  console.log("puedo iniciar sesion:" + res);
+}) // it
 // ....................................................
 // ....................................................
   it( "cerrar conexión a la base de datos",

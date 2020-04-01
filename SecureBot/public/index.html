@@ -7,40 +7,92 @@
   <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
   <meta name="author" content="GeeksLabs">
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
-  <link rel="shortcut icon" href="img/favicon.png">
+  <link rel="shortcut icon" href="img/favicon.png" crossorigin="anonymous">
 
-  <title>Login Page 2 | Creative - Bootstrap 3 Responsive Admin Template</title>
+  <title>Iniciar Sesión</title>
 
   <!-- Bootstrap CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
   <!-- bootstrap theme -->
-  <link href="css/bootstrap-theme.css" rel="stylesheet">
+  <link href="css/bootstrap-theme.css" rel="stylesheet" crossorigin="anonymous">
   <!--external css-->
   <!-- font icon -->
-  <link href="css/elegant-icons-style.css" rel="stylesheet" />
-  <link href="css/font-awesome.css" rel="stylesheet" />
+  <link href="css/elegant-icons-style.css" rel="stylesheet" crossorigin="anonymous" />
+  <link href="css/font-awesome.css" rel="stylesheet" crossorigin="anonymous" />
   <!-- Custom styles -->
   <link href="css/style.css" rel="stylesheet">
-  <link href="css/style-responsive.css" rel="stylesheet" />
+  <link href="css/style-responsive.css" rel="stylesheet" crossorigin="anonymous"/>
 
-  <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
-  <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <script src="js/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- =======================================================
-      Theme Name: NiceAdmin
-      Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-      Author: BootstrapMade
-      Author URL: https://bootstrapmade.com
-    ======================================================= -->
 </head>
 
 <body class="login-img3-body">
 
+  <script>
+
+    class LogicaFake {
+
+      constructor( ){
+        console.log("Proxy creado")
+      }
+
+      //----------------------------------------------------------------------
+      // datos:JSON{usuario:Texto, password:Texto}
+      // --> iniciarSesion() -->
+      // V/F
+      //----------------------------------------------------------------------
+      iniciarSesion( datos, callback){
+
+        fetch("http://192.168.56.1:8080"+"/iniciarSesion",{
+          method: 'POST', // or 'PUT'
+          body: JSON.stringify(datos), // data can be `string` or {object}!
+          headers: {
+          'User-Agent': 'Emilio',
+          'Content-Type': 'application/json'
+          }
+        })
+        .then((res)=>{
+          return res.json();
+        })
+        .then((data)=>{
+          callback(data.laRespuesta)
+        })
+      }
+
+  }
+
+    var elProxy = new LogicaFake()
+
+    function iniciarSesionHTML(){
+      
+      var usuarioHTML = document.getElementById("usuario").value;
+      var passwordHTML = document.getElementById("password").value;
+      var recuerdame = document.getElementById("recuerdame").checked;
+      
+      console.log(recuerdame);
+
+      elProxy.iniciarSesion({usuario: usuarioHTML, password: passwordHTML}, function(res){
+        console.log(res);
+        if(res && recuerdame){
+          document.cookie = {usuario: usuarioHTML}
+          window.location = "./admin.html"
+        } 
+
+        if( res && !recuerdame ){
+          window.location = "./admin.html"
+        }
+
+        if( !res ){
+          console.log("Usuario o contraseña incorrectos");      
+        }
+        
+      })
+
+    }
+  
+</script>
+
   <div class="container">
-    <form class="login-form" action="home.html">
+    <form class="login-form">
       <div class="login-wrap">
         
         <img class="imagen-login" src="./img/robot.svg"  width=40%;>
@@ -48,18 +100,17 @@
         <h1 class="text-center" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">SecureBot</h1>
         <div class="input-group">
           <span class="input-group-addon"><i class="icon_profile"></i></span>
-          <input type="text" class="form-control" placeholder="Username" autofocus>
+          <input id="usuario" type="text" class="form-control" placeholder="Usuario" autofocus >
         </div>
         <div class="input-group">
           <span class="input-group-addon"><i class="icon_key_alt"></i></span>
-          <input type="password" class="form-control" placeholder="Password">
+          <input id="password" type="password" class="form-control" placeholder="Contraseña" >
         </div>
         <label class="checkbox" class="text-center">
-                <input type="checkbox" value="remember-me"> Recuérdame
+                <input type="checkbox" id="recuerdame"> Recuérdame
                 <span class="pull-right"> <a href="#"> ¿Olvidaste la contraseña?</a></span>
             </label>
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
-        <button class="btn btn-info btn-lg btn-block" type="submit">Signup</button>
+        <span class="btn btn-primary btn-lg btn-block" onclick="iniciarSesionHTML()">Iniciar Sesión</span>
       </div>
     </form>
     <div class="text-right">
