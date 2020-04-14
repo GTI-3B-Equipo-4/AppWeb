@@ -30,6 +30,15 @@
   <link href="css/style.css" rel="stylesheet">
   <link href="css/style-responsive.css" rel="stylesheet" />
 
+  <script type="text/javascript" src="https://static.robotwebtools.org/EaselJS/current/easeljs.min.js"></script>
+  <script type="text/javascript" src="https://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+  <script type="text/javascript" src="https://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+  <script type="text/javascript" src="https://static.robotwebtools.org/ros2djs/current/ros2d.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
   <!--[if lt IE 9]>
       <script src="js/html5shiv.js"></script>
@@ -348,50 +357,66 @@
                 Streaming Robot#01
               </header>
 
-              <div class="col-md-12 text-center my-2">
-                  <div id="divCamera"></div>
 
+              <div id="app" class="row">
+                <div class="col-lg-9 col-md-12">
+                  <div class="panel panel-default">
+                      
+                      <div class="col-md-12 col-sm-6 text-center">
+                        <h3>Connection status</h3>
+                        <p class="text-danger" v-if="!connected">Not connected</p>
+                        <p class="text-succes" v-if="connected">Connected</p>
+                        <label>ROSBridge address</label>
+                        <br>
+                        <input type="text" v-model="rosbridge_address"/>
+                        <br><br>
+                        <button :disabled="loading" class="btn btn-danger" @click="disconnect"
+                        v-if="connected">Disconnect!</button>
+      
+                        <button :dissabled="loading" class="btn btn-success" @click="connect" v-else>Connect</button>
+                        
+                      </div>                   
+                    <div class="col-md-12 col-sm-6">
+                      
+                      <div class= "col-md-12 text-center my-2">
+                        <button @click="forward" :disabled="loading || !connected" class="btn btn-primary"> Recto </button>
+                      </div>
+        
+        
+                      <div class= "col-md-4 text-center my-2">
+                        <button @click="turnLeft" :disabled="loading || !connected" class="btn btn-primary"> Izquierda </button>
+                      </div>
+        
+                      <div class= "col-md-4 text-center my-2">
+                        <button @click="stop" :disabled="loading || !connected" class="btn btn-danger"> Stop </button>
+                      </div>
+        
+                      <div class= "col-md-4 text-center my-2">
+                        <button @click="turnRight" :disabled="loading || !connected" class="btn btn-primary"> Derecha </button>
+                      </div>
+        
+                      <div class= "col-md-12 text-center my-2">
+                        <button @click="backward" :disabled="loading || !connected" class="btn btn-primary"> Atras </button>
+                      </div>
+        
+        
+                      <div class="col-md-12 text-center my-2">
+                        <div id="divCamera"></div>
+                    </div>
+                      
+                    </div>
+      
+                  </div>
+                </div>
+      
               </div>
 
-              <div class="col-md-12 col-sm-6 text-center">
-                <h3>Connection status</h3>
-                <p class="text-danger" v-if="!connected">Not connected</p>
-                <p class="text-succes" v-if="connected">Connected</p>
-                <label>ROSBridge address</label>
-                <br>
-                <input type="text" v-model="rosbridge_address"/>
-                <br><br>
-                <button :disabled="loading" class="btn btn-danger" @click="disconnect"
-                v-if="connected">Disconnect!</button>
 
-                <button :dissabled="loading" class="btn btn-success" @click="connect" v-else>Connect</button>
-                
-              </div>
+              
 
-              <div class="text-center">
+              
 
-              <div class= "col-md-12 text-center my-2">
-                <button @click="forward" :disabled="loading || !connected" class="btn btn-primary"> Recto </button>
-              </div>
-
-
-              <div class= "col-md-4 text-center my-2">
-                <button @click="turnLeft" :disabled="loading || !connected" class="btn btn-primary"> Izquierda </button>
-              </div>
-
-              <div class= "col-md-4 text-center my-2">
-                <button @click="stop" :disabled="loading || !connected" class="btn btn-danger"> Stop </button>
-              </div>
-
-              <div class= "col-md-4 text-center my-2">
-                <button @click="turnRight" :disabled="loading || !connected" class="btn btn-primary"> Derecha </button>
-              </div>
-
-              <div class= "col-md-12 text-center my-2">
-                <button @click="backward" :disabled="loading || !connected" class="btn btn-primary"> Atras </button>
-              </div>
-
-            </div>
+           
 
 
             </section>
@@ -446,13 +471,13 @@
   <script type="text/javascript" src="js/mjpegcanvas.min.js"></script>
   <script src="js/bootstrap-wysiwyg-custom.js"></script>
   <script src="js/moment.js"></script>
+  <script src="js/mainStream.js"></script>
   <script src="js/bootstrap-colorpicker.js"></script>
   <script src="js/daterangepicker.js"></script>
   <script src="js/bootstrap-datepicker.js"></script>
   <!-- ck editor -->
   <script type="text/javascript" src="assets/ckeditor/ckeditor.js"></script>
   <!-- custom form component script for this page-->
-  <script src="js/form-component.js"></script>
   <!-- custome script for all page -->
   <script src="js/scripts.js"></script>
 

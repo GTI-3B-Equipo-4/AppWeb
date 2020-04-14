@@ -22,7 +22,7 @@ let vueApp = new Vue({
                 width: 320,
                 height: 240,
                 topic: '/turtlebot3/camera/image_raw',
-                ssl: false
+                ssl: false,
             })
             
         }, 
