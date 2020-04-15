@@ -26,70 +26,40 @@
 </head>
 
 <body class="login-img3-body">
-
+  <script type="text/javascript" src="../js/PROXY.js"></script>
   <script>
 
-    class LogicaFake {
+      var elProxy = new LogicaFake()
 
-      constructor( ){
-        console.log("Proxy creado")
-      }
-
-      //----------------------------------------------------------------------
-      // datos:JSON{usuario:Texto, password:Texto}
-      // --> iniciarSesion() -->
-      // V/F
-      //----------------------------------------------------------------------
-      iniciarSesion( datos, callback){
-
-        fetch("http://192.168.56.1:8080"+"/iniciarSesion",{
-          method: 'POST', // or 'PUT'
-          body: JSON.stringify(datos), // data can be `string` or {object}!
-          headers: {
-          'User-Agent': 'Emilio',
-          'Content-Type': 'application/json'
-          }
-        })
-        .then((res)=>{
-          return res.json();
-        })
-        .then((data)=>{
-          callback(data.laRespuesta)
-        })
-      }
-
-  }
-
-    var elProxy = new LogicaFake()
-
-    function iniciarSesionHTML(){
-      
-      var usuarioHTML = document.getElementById("usuario").value;
-      var passwordHTML = document.getElementById("password").value;
-      var recuerdame = document.getElementById("recuerdame").checked;
-      
-      console.log(recuerdame);
-
-      elProxy.iniciarSesion({usuario: usuarioHTML, password: passwordHTML}, function(res){
-        console.log(res);
-        if(res && recuerdame){
-          document.cookie = {usuario: usuarioHTML}
-          window.location = "./admin.html"
-        } 
-
-        if( res && !recuerdame ){
-          window.location = "./admin.html"
-        }
-
-        if( !res ){
-          console.log("Usuario o contraseña incorrectos");      
-        }
+      function iniciarSesionHTML(){
         
-      })
+        var usuarioHTML = document.getElementById("usuario").value;
+        var passwordHTML = document.getElementById("password").value;
+        var recuerdame = document.getElementById("recuerdame").checked;
+        
+        console.log(recuerdame);
 
-    }
+        elProxy.iniciarSesion({usuario: usuarioHTML, password: passwordHTML}, function(res){
+          console.log(res);
+          if(res && recuerdame){
+            document.cookie = {usuario: usuarioHTML}
+            window.location = "./admin.html"
+          } 
+
+          if( res && !recuerdame ){
+            window.location = "./admin.html"
+          }
+
+          if( !res ){
+            console.log("Usuario o contraseña incorrectos");      
+          }
+          
+        })
+
+      }
+    
+  </script>
   
-</script>
 
   <div class="container">
     <form class="login-form">
