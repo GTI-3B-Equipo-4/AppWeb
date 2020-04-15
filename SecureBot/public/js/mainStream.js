@@ -25,7 +25,57 @@ let vueApp = new Vue({
                 ssl: false,
             })
             
-        }, 
+        },
+        moverIzquierda: function() {
+            let topic = new ROSLIB.Topic({
+            ros: this.ros,
+            name: '/cmd_vel',
+            messageType: 'geometry_msgs/Twist'
+            })
+        
+            let message = new ROSLIB.Message({
+            linear: {x: 1,y: 0, z:0,},
+            angular: {x: 0,y: 0, z: -0.5,},
+            })
+        
+            topic.publish(message)
+        }
+        ,moverDerecha: function(){
+            let topic = new ROSLIB.Topic({
+            ros: this.ros,
+            name: '/cmd_vel',
+            messageType: 'geometry_msgs/Twist'
+            })
+            let message = new ROSLIB.Message({
+            linear: {x:1, y:0, z:0, },
+            angular: {x:0, y:0, z:0.5, },
+            })
+            topic.publish(message)
+        },
+        moverHaciaDelante: function(){
+            let topic = new ROSLIB.Topic({
+            ros: this.ros,
+            name: '/cmd_vel',
+            messageType: 'geometry_msgs/Twist'
+            })
+            let message = new ROSLIB.Message({
+            linear: {x:1, y:0, z:0, },
+            angular: {x:0, y:0, z:0, },
+            })
+            topic.publish(message)
+        },
+        Stop: function(){
+            let topic = new ROSLIB.Topic({
+            ros: this.ros,
+            name: '/cmd_vel',
+            messageType: 'geometry_msgs/Twist'
+            })
+            let message = new ROSLIB.Message({
+            linear: {x:0, y:0, z:0, },
+            angular: {x:0, y:0, z:0, },
+            })
+            topic.publish(message)
+        },
         connect: function() {
             this.loading = true
             // define ROSBridge connection object
