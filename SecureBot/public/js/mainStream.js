@@ -23,6 +23,7 @@ let vueApp = new Vue({
                 height: 240,
                 topic: '/turtlebot3/camera/image_raw',
                 ssl: false,
+<<<<<<< Updated upstream
             })
             
         },
@@ -75,6 +76,9 @@ let vueApp = new Vue({
             angular: {x:0, y:0, z:0, },
             })
             topic.publish(message)
+=======
+            })     
+>>>>>>> Stashed changes
         },
         connect: function() {
             this.loading = true
