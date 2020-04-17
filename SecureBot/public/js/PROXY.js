@@ -12,22 +12,22 @@ class LogicaFake {
   //----------------------------------------------------------------------
   iniciarSesion( datos, callback){
 
-    var myInit = { method: 'GET',
-                   headers: {
-                     'User-Agent' : 'DreamTeam', 'Content-Type' : 'application/json'
-                   },
-                   mode: 'cors',
-                   cache: 'default' };
-
-    fetch(ip_host+"/iniciarSesion", myInit)
+    fetch(ip_host+"/iniciarSesion",{
+      method: 'POST', // or 'PUT'
+      body: JSON.stringify(datos), // data can be `string` or {object}!
+      headers: {
+      'User-Agent': 'Emilio',
+      'Content-Type': 'application/json'
+      }
+    })
     .then((res)=>{
       return res.json();
     })
     .then((data)=>{
       callback(data.laRespuesta)
     })
-
   }
+
 
 }
 
