@@ -65,6 +65,63 @@ let vueApp = new Vue({
 		disconnect: function() {
             this.ros.close()
         },
+        set_param: function(value){
+		    //set service busy
+		    service_busy = true
+		    let web_param = new ROSLIB.Param({
+		        ros: this.ros,
+		        name: 'web_param'
+            })
+            //if you need collect from the web
+            //web_param.set(this.param_val)
+            //web_param.set(value)
+            this.param_val = value
+            console.log(value)
+		    service_busy = false
+		    console.log('Reading param')
+        },
+        set_battery: function(value){
+		    //set service busy
+		    service_busy = true
+		    let web_param = new ROSLIB.Param({
+		        ros: this.ros,
+		        name: 'web_param'
+            })
+            //if you need collect from the web
+            //web_param.set(this.param_val)
+            //web_param.set(value)
+            this.level_battery = value
+            console.log(value)
+		    service_busy = false
+		    console.log('Reading param')
+        },
+        callMachineState: function(){
+            this.service_busy = true
+            this.service_response = ''
+            //define the service to call
+            let service = new ROSLIB.Service({
+                ros: this.ros,
+                name: '/machine_state',
+                serviceType: 'dream_team_msgs/DreamTeamServiceMessage'
+            })
+            //define the request
+            let request = new ROSLIB.ServiceRequest({
+                on: this.param_val,
+                battery: this.level_battery,
+            })
+            //define a callback
+            service.callService(request, (result) => {
+                this.service_busy = false
+                this.service_response = JSON.stringify(result.success)
+                //console.log(this.service_response)
+            }, (error) => {
+                this.service_busy = false
+                if(error){
+                    console.log(error)
+                }
+            })
+            
+        }
     }, 
     mounted() {
         // page is ready
