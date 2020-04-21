@@ -366,43 +366,42 @@
                         <h3>Connection status</h3>
                         <p class="text-danger" v-if="!connected">Not connected</p>
                         <p class="text-succes" v-if="connected">Connected</p>
-                        <label>ROSBridge address</label>
-                        <br>
-                        <input type="text" v-model="rosbridge_address"/>
                         <br><br>
                         <button :disabled="loading" class="btn btn-danger" @click="disconnect"
                         v-if="connected">Disconnect!</button>
       
                         <button :dissabled="loading" class="btn btn-success" @click="connect" v-else>Connect</button>
                         
-                      </div>                   
-                    <div class="col-md-12 col-sm-6">
+                      </div>
                       
-                      <div class= "col-md-12 text-center my-2">
-                        <button @click="forward" :disabled="loading || !connected" class="btn btn-primary"> Recto </button>
-                      </div>
-        
-        
-                      <div class= "col-md-4 text-center my-2">
-                        <button @click="turnLeft" :disabled="loading || !connected" class="btn btn-primary"> Izquierda </button>
-                      </div>
-        
-                      <div class= "col-md-4 text-center my-2">
-                        <button @click="stop" :disabled="loading || !connected" class="btn btn-danger"> Stop </button>
-                      </div>
-        
-                      <div class= "col-md-4 text-center my-2">
-                        <button @click="turnRight" :disabled="loading || !connected" class="btn btn-primary"> Derecha </button>
-                      </div>
-        
-                      <div class= "col-md-12 text-center my-2">
-                        <button @click="backward" :disabled="loading || !connected" class="btn btn-primary"> Atras </button>
-                      </div>
-        
-        
+                      
+                    <div class="col-md-12 col-sm-6">
+
                       <div class="col-md-12 text-center my-2">
                         <div id="divCamera"></div>
                     </div>
+                      
+                      <div class= "col-md-12 text-center my-2">
+                        <button @click="moverHaciaDelante" :disabled="loading || !connected" class="btn btn-primary"> Recto </button>
+                      </div>
+                      <div class= "col-md-12 text-center my-2">
+                        <button @click="girarIzquierda" :disabled="loading || !connected" class="btn btn-primary"> Izquierda </button>
+                      </div>
+        
+                      <div class= "col-md-12 text-center my-2">
+                        <button @click="Stop" :disabled="loading || !connected" class="btn btn-danger"> Stop </button>
+                      </div>
+        
+                      <div class= "col-md-12 text-center my-2">
+                        <button @click="girarDerecha" :disabled="loading || !connected" class="btn btn-primary"> Derecha </button>
+                      </div>
+        
+                      <div class= "col-md-12 text-center my-2">
+                        <button @click="moverHaciaAtras" :disabled="loading || !connected" class="btn btn-primary"> Atras </button>
+                      </div>
+        
+        
+                      
                       
                     </div>
       
