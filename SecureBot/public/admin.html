@@ -426,26 +426,27 @@
                 <div class="panel-heading">
                   <h2><i ></i><strong>Mapa Almacen</strong></h2>
                   <div class="col-md-12 col-sm-6 text-center">
-                    <h3>Connection status</h3>
                     <p class="text-danger" v-if="!connected">Not connected</p>
                     <p class="text-succes" v-if="connected">Connected</p>
-                    <label>ROSBridge address</label>
-                    <br>
-                    <input type="text" v-model="rosbridge_address"/>
-                    <br><br>
-                    <button :disabled="loading" class="btn btn-danger" @click="disconnect"
-                    v-if="connected">Disconnect!</button>
-
-                    <button :dissabled="loading" class="btn btn-success" @click="connect" v-else>Connect</button>
+                    
                     
                   </div>
-                </div>
-                <div class="col-md-12 col-sm-6">
-                  <div class="col-md-12 text-center my-2" >
-                    <div id="map"></div>
-                  </div>
+
                   
+                    <div class="col-md-12 text-center my-2" >
+                      <div id="map"></div>
+                      <button :disabled="loading" class="btn btn-danger" @click="disconnect"
+                      v-if="connected">Disconnect!</button>
+  
+                      <button :dissabled="loading" class="btn btn-success" @click="connect" v-else>Connect</button>
+                    </div>
+                    
+                  
+
+
+
                 </div>
+                
 
               </div>
             </div>

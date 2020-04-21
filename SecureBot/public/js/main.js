@@ -42,8 +42,8 @@ let vueApp = new Vue({
 
                 this.mapViewer = new ROS2D.Viewer({
                     divID:'map',
-                    width:420,
-                    height:360
+                    width:720,
+                    height:400
                 })
 
                 this.mapGridClient = new ROS2D.OccupancyGridClient({
@@ -136,6 +136,7 @@ let vueApp = new Vue({
     }, 
     mounted() {
         // page is ready
+        this.connect()
         console.log('page is ready!')
     },
 })
