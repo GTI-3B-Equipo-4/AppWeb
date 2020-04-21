@@ -18,7 +18,7 @@ let vueApp = new Vue({
             console.log('Setting the camera');
             let Viewer1 = new MJPEGCANVAS.Viewer({
                 divID: 'divCamera',
-                host: '127.0.0.1:8080',
+                host: '127.0.0.1:7000',
                 width: 320,
                 height: 240,
                 topic: '/turtlebot3/camera/image_raw',
