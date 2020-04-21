@@ -6,7 +6,7 @@
 // .....................................................................
 
 let vueApp = new Vue({
-    el: "#app",
+    el: "#appVue",
     data: {
         // ros connection
         ros: null,
