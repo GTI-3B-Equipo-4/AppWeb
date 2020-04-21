@@ -24,9 +24,8 @@ let vueApp = new Vue({
                 topic: '/turtlebot3/camera/image_raw',
                 ssl: false,
             })
-            
         },
-        moverIzquierda: function() {
+        girarIzquierda: function() {
             let topic = new ROSLIB.Topic({
             ros: this.ros,
             name: '/cmd_vel',
@@ -34,21 +33,21 @@ let vueApp = new Vue({
             })
         
             let message = new ROSLIB.Message({
-            linear: {x: 1,y: 0, z:0,},
-            angular: {x: 0,y: 0, z: -0.5,},
+            linear: {x: 0,y: 0, z:0},
+            angular: {x: 0,y: 0, z: 0.5},
             })
         
             topic.publish(message)
         }
-        ,moverDerecha: function(){
+        ,girarDerecha: function(){
             let topic = new ROSLIB.Topic({
             ros: this.ros,
             name: '/cmd_vel',
             messageType: 'geometry_msgs/Twist'
             })
             let message = new ROSLIB.Message({
-            linear: {x:1, y:0, z:0, },
-            angular: {x:0, y:0, z:0.5, },
+            linear: {x:0, y:0, z:0},
+            angular: {x:0, y:0, z:-0.5},
             })
             topic.publish(message)
         },
@@ -59,8 +58,8 @@ let vueApp = new Vue({
             messageType: 'geometry_msgs/Twist'
             })
             let message = new ROSLIB.Message({
-            linear: {x:1, y:0, z:0, },
-            angular: {x:0, y:0, z:0, },
+            linear: {x:0.5, y:0, z:0},
+            angular: {x:0, y:0, z:0},
             })
             topic.publish(message)
         },
@@ -71,8 +70,20 @@ let vueApp = new Vue({
             messageType: 'geometry_msgs/Twist'
             })
             let message = new ROSLIB.Message({
-            linear: {x:0, y:0, z:0, },
-            angular: {x:0, y:0, z:0, },
+            linear: {x:0, y:0, z:0},
+            angular: {x:0, y:0, z:0},
+            })
+            topic.publish(message)
+        },
+        moverHaciaAtras: function(){
+            let topic = new ROSLIB.Topic({
+            ros: this.ros,
+            name: '/cmd_vel',
+            messageType: 'geometry_msgs/Twist'
+            })
+            let message = new ROSLIB.Message({
+            linear: {x:-0.5, y:0, z:0},
+            angular: {x:0, y:0, z:0},
             })
             topic.publish(message)
         },
@@ -112,6 +123,7 @@ let vueApp = new Vue({
     }, 
     mounted() {
         // page is ready
+        this.connect()
         console.log('page is ready!')
     },
 })
