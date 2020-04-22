@@ -379,30 +379,34 @@
 
                       <div class="col-md-12 text-center my-2">
                         <div id="divCamera"></div>
-                    </div>
+                      </div>
+                      <div class="row">
+                      <div class="col-md-12 text-center">
+                        <h5>Comandos del robot</h5>
+                      </div>
+                        <div class="col-md-12 col-sm-6 btn-stream" style="overflow: auto;">
+                          <div class= "col-md-12 col-sm-6 text-center my-2">
+                            <button @click="moverHaciaDelante" :disabled="loading || !connected" class="btn btn-primary"> Recto </button>
+                          </div>
+                          <div class= "col-md-4 text-center  my-2 btn-stream">
+                            <button @click="girarIzquierda" :disabled="loading || !connected" class="btn btn-primary"> Izquierda </button>
+                          </div>
+        
+                          <div class= "col-md-4 text-center my-2 btn-stream">
+                            <button @click="Stop" :disabled="loading || !connected" class="btn btn-danger"> Stop </button>
+                          </div>
+        
+                          <div class= "col-md-4 text-center my-2 btn-stream">
+                            <button @click="girarDerecha" :disabled="loading || !connected" class="btn btn-primary"> Derecha </button>
+                          </div>
+        
+                           <div class= "col-md-12 text-center my-2 btn-stream">
+                            <button @click="moverHaciaAtras" :disabled="loading || !connected" class="btn btn-primary"> Atras </button>
+                          </div>
+        
+                        </div>
                       
-                      <div class= "col-md-12 text-center my-2">
-                        <button @click="moverHaciaDelante" :disabled="loading || !connected" class="btn btn-primary"> Recto </button>
                       </div>
-                      <div class= "col-md-12 text-center my-2">
-                        <button @click="girarIzquierda" :disabled="loading || !connected" class="btn btn-primary"> Izquierda </button>
-                      </div>
-        
-                      <div class= "col-md-12 text-center my-2">
-                        <button @click="Stop" :disabled="loading || !connected" class="btn btn-danger"> Stop </button>
-                      </div>
-        
-                      <div class= "col-md-12 text-center my-2">
-                        <button @click="girarDerecha" :disabled="loading || !connected" class="btn btn-primary"> Derecha </button>
-                      </div>
-        
-                      <div class= "col-md-12 text-center my-2">
-                        <button @click="moverHaciaAtras" :disabled="loading || !connected" class="btn btn-primary"> Atras </button>
-                      </div>
-        
-        
-                      
-                      
                     </div>
       
                   </div>
