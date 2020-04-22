@@ -27,6 +27,7 @@
 
 <body class="login-img3-body">
   <script type="text/javascript" src="../js/PROXY.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script>
 
       var elProxy = new LogicaFake()
@@ -42,16 +43,26 @@
         elProxy.iniciarSesion({usuario: usuarioHTML, password: passwordHTML}, function(res){
           console.log(res);
           if(res && recuerdame){
-            document.cookie = {usuario: usuarioHTML}
-            window.location = "./admin.html"
+            swal("Correcto!", "Bienvenido" + usuarioHTML, "success")
+            setTimeout(function(){
+              document.cookie = {usuario: usuarioHTML}
+              window.location = "./admin.html";
+            },2000)
+            
           } 
 
           if( res && !recuerdame ){
-            window.location = "./admin.html"
+            swal("Correcto!", "Bienvenido" + usuarioHTML, "success")
+            setTimeout(function(){
+              window.location = "./admin.html";
+            },2000)
+            
+           
           }
 
           if( !res ){
-            console.log("Usuario o contraseña incorrectos");      
+            console.log("Usuario o contraseña incorrectos");
+            swal("Usuario incorrecto", "nombre de usuario y/o contraseña incorrectos", "error")      
           }
           
         })
