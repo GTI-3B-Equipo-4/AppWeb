@@ -58,6 +58,16 @@
 
 <body>
 
+  <script>
+
+  function cerrarSesion(){
+    document.cookie = "usuario=;"
+    document.cookie = "password=;"
+    window.location = "./index.html"
+  }
+
+  </script>
+
   <!-- container section start -->
   <section id="container" class="">
     <!--header start-->
@@ -92,8 +102,8 @@
                     <div class="desc">Sala 1 </div>
                     <label id="toggle-connect" class="switch switch-flat">
                       <input class="switch-input" type="checkbox" />
-                      <span class="switch-label" data-on="P" data-off="R"></span> 
-                      <span class="switch-handle"></span> 
+                      <span class="switch-label" data-on="P" data-off="R"></span>
+                      <span class="switch-handle"></span>
                     </label>
                   </div>
                 </a>
@@ -107,11 +117,11 @@
                         <!-- Switch del robot 2 -->
                           <label id="toggle-connect" class="switch switch-flat">
                             <input class="switch-input" type="checkbox" checked="true"/>
-                            <span class="switch-label" data-on="P" data-off="R"></span> 
-                            <span class="switch-handle"></span> 
+                            <span class="switch-label" data-on="P" data-off="R"></span>
+                            <span class="switch-handle"></span>
                           </label>
                       </td>
-                      
+
                   </div>
                 </a>
               </li>
@@ -119,16 +129,16 @@
                 <a href="#">
                   <div class="task-info">
                     <div class="desc">
-                     Sala 2 
+                     Sala 2
                     </div>
                         <!-- Switch del robot 2 -->
                         <label id="toggle-connect" class="switch switch-flat">
                           <input class="switch-input" type="checkbox" checked="true"/>
-                          <span class="switch-label" data-on="P" data-off="R"></span> 
-                          <span class="switch-handle"></span> 
+                          <span class="switch-label" data-on="P" data-off="R"></span>
+                          <span class="switch-handle"></span>
                         </label>
                       </td>
-                      
+
                   </div>
                 </a>
               </li>
@@ -139,16 +149,16 @@
                   </div>
                   <label id="toggle-connect" class="switch switch-flat">
                     <input class="switch-input" type="checkbox" checked="true"/>
-                    <span class="switch-label" data-on="P" data-off="R"></span> 
-                    <span class="switch-handle"></span> 
+                    <span class="switch-label" data-on="P" data-off="R"></span>
+                    <span class="switch-handle"></span>
                   </label>
                 </a>
               </li>
               <li>
-               
+
               </li>
               <li class="external">
-               <!--<a href="#">See All Tasks</a>--> 
+               <!--<a href="#">See All Tasks</a>-->
               </li>
             </ul>
           </li>
@@ -293,7 +303,7 @@
                 <a href="documentation.html"><i class="icon_key_alt"></i> Documentation</a>
               </li>
               <li>
-                <a href="documentation.html"><i class="icon_key_alt"></i> Documentation</a>
+                <a onclick="cerrarSesion()"><i class="icon_key_alt"></i> Cerrar Sesion</a>
               </li>
             </ul>
           </li>
@@ -356,7 +366,7 @@
               <div id="app" class="row">
                 <div class="col-lg-9 col-md-12">
                   <div class="panel panel-default">
-                      
+
                       <div class="col-md-12 col-sm-6 text-center">
                         <h3>Connection status</h3>
                         <p class="text-danger" v-if="!connected">Not connected</p>
@@ -364,12 +374,12 @@
                         <br><br>
                         <button :disabled="loading" class="btn btn-danger" @click="disconnect"
                         v-if="connected">Disconnect!</button>
-      
+
                         <button :dissabled="loading" class="btn btn-success" @click="connect" v-else>Connect</button>
-                        
+
                       </div>
-                      
-                    <!-- Apartado Streaming del robot -->  
+
+                    <!-- Apartado Streaming del robot -->
                     <div class="col-md-12 col-sm-6">
                       <!-- Ventana de la camara del robot en streaming -->
                       <div class="col-md-12 text-center my-2">
@@ -394,37 +404,37 @@
                             <button @click="moverHaciaAtras" :disabled="loading || !connected" class="btn btn-primary"><img alt="Atras" src="./img/icons/atras.svg" width="15px" height="15px"/></button>
                           </div>
                           <div class= "col-md-12 text-center my-2 btn-stream">
-                            
+
                           </div>
-                          
-        
+
+
                         </div>
-                      
+
                       </div>
                     </div>
-      
+
                   </div>
                 </div>
-      
+
               </div>
 
 
-              
 
-              
 
-           
+
+
+
 
 
             </section>
-            
-          
+
+
           </div>
         </div>
         <!-- Basic Forms & Horizontal Forms-->
 
-        
-      
+
+
 
         <!-- page end-->
       </section>

@@ -35,7 +35,7 @@
   <link href="css/style-responsive.css" rel="stylesheet" />
   <link href="css/xcharts.min.css" rel=" stylesheet">
   <link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
-  
+
 
   <script type="text/javascript" src="https://static.robotwebtools.org/EaselJS/current/easeljs.min.js"></script>
   <script type="text/javascript" src="https://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
@@ -49,6 +49,13 @@
 
 <body>
   <script>
+
+    function cerrarSesion(){
+      document.cookie = "usuario=;"
+      document.cookie = "password=;"
+      window.location = "./index.html"
+    }
+    
     //Script para manejar switch de estados, de patrullando a reposo
     document.addEventListener('DOMContentLoaded', function () {
             //Switch del robot 1
@@ -157,8 +164,8 @@
                     <div class="desc">Sala 1 </div>
                     <label id="toggle-connect" class="switch switch-flat">
                       <input class="switch-input" type="checkbox" />
-                      <span class="switch-label" data-on="P" data-off="R"></span> 
-                      <span class="switch-handle"></span> 
+                      <span class="switch-label" data-on="P" data-off="R"></span>
+                      <span class="switch-handle"></span>
                     </label>
                   </div>
                 </a>
@@ -172,11 +179,11 @@
                         <!-- Switch del robot 2 -->
                           <label id="toggle-connect" class="switch switch-flat">
                             <input class="switch-input" type="checkbox" checked="true"/>
-                            <span class="switch-label" data-on="P" data-off="R"></span> 
-                            <span class="switch-handle"></span> 
+                            <span class="switch-label" data-on="P" data-off="R"></span>
+                            <span class="switch-handle"></span>
                           </label>
                       </td>
-                      
+
                   </div>
                 </a>
               </li>
@@ -184,16 +191,16 @@
                 <a href="#">
                   <div class="task-info">
                     <div class="desc">
-                     Sala 2 
+                     Sala 2
                     </div>
                         <!-- Switch del robot 2 -->
                         <label id="toggle-connect" class="switch switch-flat">
                           <input class="switch-input" type="checkbox" checked="true"/>
-                          <span class="switch-label" data-on="P" data-off="R"></span> 
-                          <span class="switch-handle"></span> 
+                          <span class="switch-label" data-on="P" data-off="R"></span>
+                          <span class="switch-handle"></span>
                         </label>
                       </td>
-                      
+
                   </div>
                 </a>
               </li>
@@ -204,16 +211,16 @@
                   </div>
                   <label id="toggle-connect" class="switch switch-flat">
                     <input class="switch-input" type="checkbox" checked="true"/>
-                    <span class="switch-label" data-on="P" data-off="R"></span> 
-                    <span class="switch-handle"></span> 
+                    <span class="switch-label" data-on="P" data-off="R"></span>
+                    <span class="switch-handle"></span>
                   </label>
                 </a>
               </li>
               <li>
-               
+
               </li>
               <li class="external">
-               <!--<a href="#">See All Tasks</a>--> 
+               <!--<a href="#">See All Tasks</a>-->
               </li>
             </ul>
           </li>
@@ -358,7 +365,7 @@
                 <a href="documentation.html"><i class="icon_key_alt"></i> Documentation</a>
               </li>
               <li>
-                <a href="index.html"><i class="icon_key_alt"></i> Cerrar sesion</a>
+                <a onclick="cerrarSesion()"><i class="icon_key_alt"></i> Cerrar sesion</a>
               </li>
             </ul>
           </li>
@@ -421,25 +428,25 @@
                   <div class="col-md-12 col-sm-6 text-center">
                     <p class="text-danger" v-if="!connected">Not connected</p>
                     <p class="text-succes" v-if="connected">Connected</p>
-                    
-                    
+
+
                   </div>
 
-                  
+
                     <div class="col-md-12 text-center my-2" >
                       <div id="map"></div>
                       <button :disabled="loading" class="btn btn-danger" @click="disconnect"
                       v-if="connected">Disconnect!</button>
-  
+
                       <button :dissabled="loading" class="btn btn-success" @click="connect" v-else>Connect</button>
                     </div>
-                    
-                  
+
+
 
 
 
                 </div>
-                
+
 
               </div>
             </div>
@@ -489,8 +496,8 @@
                             <!-- Switch del robot 1 -->
                               <label id="toggle-connect" class="switch switch-flat">
                                 <input id="state_r_1" class="switch-input" type="checkbox" />
-                                <span class="switch-label" data-on="P" data-off="R"></span> 
-                                <span class="switch-handle"></span> 
+                                <span class="switch-label" data-on="P" data-off="R"></span>
+                                <span class="switch-handle"></span>
                               </label>
                           </td>
                           <td>
@@ -501,7 +508,7 @@
                           </td>
                         </tr>
                         <tr>
-                        
+
                         <!-- Robot 2 -->
                         <td>02</td>
                         <td>Almacen2</td>
@@ -510,8 +517,8 @@
                           <!-- Switch del robot 2 -->
                             <label id="toggle-connect" class="switch switch-flat">
                               <input id="state_r_2" class="switch-input" type="checkbox" checked="true"/>
-                              <span class="switch-label" data-on="P" data-off="R"></span> 
-                              <span class="switch-handle"></span> 
+                              <span class="switch-label" data-on="P" data-off="R"></span>
+                              <span class="switch-handle"></span>
                             </label>
                         </td>
                         <td>
@@ -522,7 +529,7 @@
                         </td>
                       </tr>
                       <tr>
-                        
+
                         <!-- Robot 3 -->
                         <td>03</td>
                         <td>Sala2</td>
@@ -531,8 +538,8 @@
                           <!-- Switch del robot 3 -->
                             <label id="toggle-connect" class="switch switch-flat">
                               <input id="state_r_3" class="switch-input" type="checkbox" checked="true"/>
-                              <span class="switch-label" data-on="P" data-off="R"></span> 
-                              <span class="switch-handle"></span> 
+                              <span class="switch-label" data-on="P" data-off="R"></span>
+                              <span class="switch-handle"></span>
                             </label>
                         </td>
                         <td>
@@ -542,8 +549,8 @@
                           </div>
                           <span class="sr-only">93%</span>
                         </td>
-                        
-                        
+
+
                       </tr>
                       <tr>
                         <!-- Robot 4 -->
@@ -554,8 +561,8 @@
                           <!-- Switch del robot 4 -->
                             <label id="toggle-connect" class="switch switch-flat">
                               <input id="state_r_4" class="switch-input" type="checkbox" checked="true"/>
-                              <span class="switch-label" data-on="P" data-off="R"></span> 
-                              <span class="switch-handle"></span> 
+                              <span class="switch-label" data-on="P" data-off="R"></span>
+                              <span class="switch-handle"></span>
                             </label>
                         </td>
                         <td>
@@ -565,7 +572,7 @@
                           </div>
                           <span class="sr-only">20%</span>
                         </td>
-                                          
+
                       </tr>
 
                     </tbody>
@@ -582,10 +589,10 @@
           <div class="row">
             <div class="col-lg-9 col-md-12">
               <!--Project Activity start-->
-              <div class="panel panel-default">             
+              <div class="panel panel-default">
                   <div class="panel-heading">
                     <h2><i class="fa fa-flag-o red"></i><strong>Historial</strong></h2>
-                    
+
                   </div>
               <div class="panel-body">
                 <table class="table bootstrap-datatable countries">
@@ -601,23 +608,23 @@
                   <tbody>
 
                     <tr>
-                        
+
                       <td>11/03/2020</td>
                       <td>01</td>
                       <td> <span class="badge bg-succes">Patrulla</span> </td>
                       <td>18:00</td>
                       <td>6h</td>
-                        
+
                     </tr>
 
                     <tr>
-                        
+
                       <td>11/03/2020</td>
                       <td>01</td>
                       <td> <span class="badge bg-succes">Patrulla</span> </td>
                       <td>18:00</td>
                       <td>6h</td>
-                        
+
                     </tr>
 
                   </tbody>
@@ -679,7 +686,7 @@
     <script src="js/sparklines.js"></script>
     <script src="js/charts.js"></script>
     <script src="js/jquery.slimscroll.min.js"></script>
-    
+
 
 </body>
 
