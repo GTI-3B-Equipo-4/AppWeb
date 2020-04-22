@@ -369,35 +369,34 @@
                         
                       </div>
                       
-                      
+                    <!-- Apartado Streaming del robot -->  
                     <div class="col-md-12 col-sm-6">
-
+                      <!-- Ventana de la camara del robot en streaming -->
                       <div class="col-md-12 text-center my-2">
                         <div id="divCamera"></div>
                       </div>
+
                       <div class="row">
-                      <div class="col-md-12 text-center">
-                        <h5>Comandos del robot</h5>
-                      </div>
+                        <div class="col-md-12 text-center">
+                          <h5>Control remoto</h5>
+                        </div>
                         <div class="col-md-12 col-sm-6 btn-stream" style="overflow: auto;">
-                          <div class= "col-md-12 col-sm-6 text-center my-2">
-                            <button @click="moverHaciaDelante" :disabled="loading || !connected" class="btn btn-primary"> Recto </button>
+                          <!-- Botones control remoto -->
+                          <div class= "col-md-12 text-center my-2 btn-stream">
+                            <button @click="moverHaciaDelante" :disabled="loading || !connected" class="btn btn-primary"><img alt="Recto" src="./img/icons/recto.svg" width="15px" height="15px"/></button>
                           </div>
-                          <div class= "col-md-4 text-center  my-2 btn-stream">
-                            <button @click="girarIzquierda" :disabled="loading || !connected" class="btn btn-primary"> Izquierda </button>
+                          <div class= "col-md-12 text-center  my-2 btn-stream">
+                            <button @click="girarIzquierda" :disabled="loading || !connected" class="btn btn-primary"><img alt="Izquierda" src="./img/icons/left.svg" width="15px" height="15px"/></button>
+                            <button @click="Stop" :disabled="loading || !connected" class="btn btn-danger"><img alt="Stop" src="./img/icons/stop.svg" width="15px" height="15px"/></button>
+                            <button @click="girarDerecha" :disabled="loading || !connected" class="btn btn-primary"><img alt="Derecha" src="./img/icons/rigth.svg" width="15px" height="15px"/></button>
                           </div>
-        
-                          <div class= "col-md-4 text-center my-2 btn-stream">
-                            <button @click="Stop" :disabled="loading || !connected" class="btn btn-danger"> Stop </button>
+                          <div class= "col-md-12 text-center my-2 btn-stream">
+                            <button @click="moverHaciaAtras" :disabled="loading || !connected" class="btn btn-primary"><img alt="Atras" src="./img/icons/atras.svg" width="15px" height="15px"/></button>
                           </div>
-        
-                          <div class= "col-md-4 text-center my-2 btn-stream">
-                            <button @click="girarDerecha" :disabled="loading || !connected" class="btn btn-primary"> Derecha </button>
+                          <div class= "col-md-12 text-center my-2 btn-stream">
+                            
                           </div>
-        
-                           <div class= "col-md-12 text-center my-2 btn-stream">
-                            <button @click="moverHaciaAtras" :disabled="loading || !connected" class="btn btn-primary"> Atras </button>
-                          </div>
+                          
         
                         </div>
                       
