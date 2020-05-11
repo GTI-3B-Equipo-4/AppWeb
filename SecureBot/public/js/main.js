@@ -154,6 +154,12 @@ let vueApp = new Vue({
             })
             
         },
+
+        getBateria: function(){
+
+            return this.level_battery
+
+        },
         crearNotificacion: function() {
         
             if (!("Notification" in window)) {
@@ -163,19 +169,51 @@ let vueApp = new Vue({
             }
            
            else if (Notification.permission === "granted") {
+
              
-             var notificacion = new Notification("SecureBot",
-              {
+
+            if(this.level_battery <= 50 ){
+
+                var notificacion = new Notification("SecureBot",
+
+                {
     
-                icon: "./img/robot.svg",
+                    icon: "./img/robot.svg",
     
-                body: "El nivel de la bateria es : "+this.level_battery
+                    body: "El nivel de la bateria es baja :" + this.level_battery, 
+
+                    timestamp: Math.floor(Date.now())
     
-              })
+                } )
+   
+                this.set_battery(100) 
+            }
+            
+            else{
+                
+                var notificacion = new Notification("SecureBot",
+
+                {
+    
+                    icon: "./img/robot.svg",
+    
+                    body: "El nivel de la bateria es alta :"+ this.level_battery, 
+
+                    timestamp: Math.floor(Date.now())
+    
+                } )
+
+            }
+                          
             }  
             
+
+
            else if (Notification.permission !== 'denied') {
+
              Notification.requestPermission(function (permission) {
+
+
                
               
                 if (permission === "granted") {
@@ -184,17 +222,28 @@ let vueApp = new Vue({
               });
             }
           
-          },
+        },
     }, 
     mounted() {
         // page is ready
         this.connect()
 
-        var tiempo = 1800000
-           
-        setInterval('this.crearNotificacion()', tiempo )
+        setTimeout(() => {
 
+            this.set_battery(100)
 
+            this.crearNotificacion()
+
+            setTimeout(() => {
+
+                this.set_battery(23)
+
+            this.crearNotificacion()
+                
+            }, 5000);
+            
+        }, 5000);
+ 
         console.log('page is ready!')
     },
 })
