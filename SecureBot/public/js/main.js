@@ -1,5 +1,5 @@
 // .....................................................................
-// Autor: Matthew Conde Oltra
+// Autores: Josep Carreres Fluixa , Eimilo Esteve Peirò , Matthew Conde Oltra
 // Fecha inicio: 17/04/2020
 // Última actualización: 17/04/2020
 // main.js
@@ -16,6 +16,7 @@ let vueApp = new Vue({
         mapGridClient:null,
         interval:null,
         loading:false,
+        bateria: null,
         logs:[],
         // page content
         menu_title: 'Connection',
@@ -39,6 +40,26 @@ let vueApp = new Vue({
                 this.logs.unshift((new Date()).toTimeString() + '- Connected!')
                 this.connected = true
                 this.loading = false
+
+
+
+                 // Funciones para saber bateria
+                 /*
+                let topic = new ROSLIB.Topic({
+
+                    ros: this.ros,
+                    name: 'battery_state',
+                    messageType: 'Sensor_msgs/BatteryState'
+
+                })
+
+                topic.subscribe(( message ) => {
+
+                    console.log(message)
+                    this.bateria = message
+
+                 })
+                 */
 
                 this.mapViewer = new ROS2D.Viewer({
                     divID:'map',
@@ -132,11 +153,48 @@ let vueApp = new Vue({
                 }
             })
             
-        }
+        },
+        crearNotificacion: function() {
+        
+            if (!("Notification" in window)) {
+    
+              alert("Este navegador no soporta las notificaciones");
+    
+            }
+           
+           else if (Notification.permission === "granted") {
+             
+             var notificacion = new Notification("SecureBot",
+              {
+    
+                icon: "./img/robot.svg",
+    
+                body: "El nivel de la bateria es : "+this.level_battery
+    
+              })
+            }  
+            
+           else if (Notification.permission !== 'denied') {
+             Notification.requestPermission(function (permission) {
+               
+              
+                if (permission === "granted") {
+                  var notification = new Notification(texto);
+                }
+              });
+            }
+          
+          },
     }, 
     mounted() {
         // page is ready
         this.connect()
+
+        var tiempo = 1800000
+           
+        setInterval('this.crearNotificacion()', tiempo )
+
+
         console.log('page is ready!')
     },
 })

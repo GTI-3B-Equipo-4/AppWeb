@@ -59,10 +59,12 @@
                 if (switch1.checked) {
                   // está patrullando
                   patrullando()
+                  crearNotificacion("Robot 1 encendido ")
                   console.log('Patrullando modo ON!');
                 } else {
                   // está en reposo
                   reposo()
+                  crearNotificacion("Robot 1 encendido ")
                   console.log('Estamos en reposo...');
                 }
             });
@@ -73,10 +75,12 @@
                 if (switch2.checked) {
                   // está patrullando
                   patrullando()
+                  crearNotificacion("Robot 2 encendido ")
                   console.log('Patrullando modo ON!');
                 } else {
                   // está en reposo
                   reposo()
+                  crearNotificacion("Robot 2 encendido ")
                   console.log('Estamos en reposo...');
                 }
             });
@@ -88,10 +92,12 @@
                 if (switch3.checked) {
                   // está patrullando
                   patrullando()
+                  crearNotificacion("Robot 3 encendido ")
                   console.log('Patrullando modo ON!');
                 } else {
                   // está en reposo
                   reposo()
+                  crearNotificacion("Robot 3 encendido ")
                   console.log('Estamos en reposo...');
                 }
             });
@@ -103,10 +109,12 @@
                 if (switch4.checked) {
                   // está patrullando
                   patrullando()
+                  crearNotificacion("Robot 4 encendido ")
                   console.log('Patrullando modo ON!');
                 } else {
                   // está en reposo
                   reposo()
+                  crearNotificacion("Robot 4 apagado ")
                   console.log('Estamos en reposo...');
                 }
             });
@@ -121,6 +129,43 @@
       document.getElementById("repose-on").click(); // Click on the checkbox
     }
   </script>
+
+  <script>
+
+      function crearNotificacion(texto) {
+        
+        if (!("Notification" in window)) {
+
+          alert("Este navegador no soporta las notificaciones");
+
+        }
+       
+       else if (Notification.permission === "granted") {
+         
+         var notificacion = new Notification("SecureBot",
+          {
+
+            icon: "./img/robot.svg",
+
+            body: texto
+
+          })
+        }  
+        
+       else if (Notification.permission !== 'denied') {
+         Notification.requestPermission(function (permission) {
+           
+          
+            if (permission === "granted") {
+              var notification = new Notification(texto);
+            }
+          });
+        }
+      
+      }
+
+  </script>
+
 
 
   <!-- container section start -->
@@ -504,7 +549,7 @@
                           <td>
                             <!-- Progres bar robot 1 -->
                             <div class="progress thin">
-                              <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">100%</div>
+                              <div id="bateria_robot1" class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">100%</div>
                             </div>
                           </td>
                         </tr>
