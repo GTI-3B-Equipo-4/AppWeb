@@ -379,26 +379,23 @@
 
                       <div class="col-md-12 text-center my-2">
                         <div id="divCamera"></div>
+                    </div>  
+                    <div class="col-md-12 col-sm-6 btn-stream" style="overflow: auto;">
+                      <!-- Botones control remoto -->
+                      <div class= "col-md-12 text-center my-2 btn-stream">
+                        <button @click="moverHaciaDelante" :disabled="loading || !connected" class="btn btn-primary"><img alt="Recto" src="./img/icons/recto.svg" width="15px" height="15px"/></button>
+                      </div>
+                      <div class= "col-md-12 text-center  my-2 btn-stream">
+                        <button @click="girarIzquierda" :disabled="loading || !connected" class="btn btn-primary"><img alt="Izquierda" src="./img/icons/left.svg" width="15px" height="15px"/></button>
+                        <button @click="Stop" :disabled="loading || !connected" class="btn btn-danger"><img alt="Stop" src="./img/icons/stop.svg" width="15px" height="15px"/></button>
+                        <button @click="girarDerecha" :disabled="loading || !connected" class="btn btn-primary"><img alt="Derecha" src="./img/icons/rigth.svg" width="15px" height="15px"/></button>
+                      </div>
+                      <div class= "col-md-12 text-center my-2 btn-stream">
+                        <button @click="moverHaciaAtras" :disabled="loading || !connected" class="btn btn-primary"><img alt="Atras" src="./img/icons/atras.svg" width="15px" height="15px"/></button>
+                      </div>
+                      <div class= "col-md-12 text-center my-2 btn-stream">
+                      </div>
                     </div>
-                      
-                      <div class= "col-md-12 text-center my-2">
-                        <button @click="moverHaciaDelante" :disabled="loading || !connected" class="btn btn-primary"> Recto </button>
-                      </div>
-                      <div class= "col-md-12 text-center my-2">
-                        <button @click="girarIzquierda" :disabled="loading || !connected" class="btn btn-primary"> Izquierda </button>
-                      </div>
-        
-                      <div class= "col-md-12 text-center my-2">
-                        <button @click="Stop" :disabled="loading || !connected" class="btn btn-danger"> Stop </button>
-                      </div>
-        
-                      <div class= "col-md-12 text-center my-2">
-                        <button @click="girarDerecha" :disabled="loading || !connected" class="btn btn-primary"> Derecha </button>
-                      </div>
-        
-                      <div class= "col-md-12 text-center my-2">
-                        <button @click="moverHaciaAtras" :disabled="loading || !connected" class="btn btn-primary"> Atras </button>
-                      </div>
         
         
                       
