@@ -42,25 +42,6 @@ let vueApp = new Vue({
                 this.loading = false
 
 
-
-                 // Funciones para saber bateria
-                 /*
-                let topic = new ROSLIB.Topic({
-
-                    ros: this.ros,
-                    name: 'battery_state',
-                    messageType: 'Sensor_msgs/BatteryState'
-
-                })
-
-                topic.subscribe(( message ) => {
-
-                    console.log(message)
-                    this.bateria = message
-
-                 })
-                 */
-
                 this.mapViewer = new ROS2D.Viewer({
                     divID:'map',
                     width:720,
