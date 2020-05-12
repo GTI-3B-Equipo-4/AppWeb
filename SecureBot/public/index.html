@@ -21,78 +21,130 @@
   <link href="css/font-awesome.css" rel="stylesheet" crossorigin="anonymous" />
   <!-- Custom styles -->
   <link href="css/style.css" rel="stylesheet">
-  <link href="css/style-responsive.css" rel="stylesheet" crossorigin="anonymous"/>
+  <link href="css/style-responsive.css" rel="stylesheet" crossorigin="anonymous" />
 
 </head>
+<script type="text/javascript" src="../js/PROXY.js"></script>
+<script>
 
-<body class="login-img3-body">
-  <script type="text/javascript" src="../js/PROXY.js"></script>
-  <script>
+function readCookie(name) {
 
-      var elProxy = new LogicaFake()
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(';');
+  console.log(ca);
 
-      function iniciarSesionHTML(){
-        
-        var usuarioHTML = document.getElementById("usuario").value;
-        var passwordHTML = document.getElementById("password").value;
-        var recuerdame = document.getElementById("recuerdame").checked;
-        
-        console.log(recuerdame);
+  for(var i=0;i < ca.length;i++) {
 
-        elProxy.iniciarSesion({usuario: usuarioHTML, password: passwordHTML}, function(res){
-          console.log(res);
-          if(res && recuerdame){
-            document.cookie = {usuario: usuarioHTML}
-            window.location = "./admin.html"
-          } 
+    var c = ca[i];
+    while (c.charAt(0)==' ') c = c.substring(1,c.length);
+    if (c.indexOf(nameEQ) == 0) {
+      return decodeURIComponent( c.substring(nameEQ.length,c.length) );
+    }
 
-          if( res && !recuerdame ){
-            window.location = "./admin.html"
-          }
+  }
 
-          if( !res ){
-            console.log("Usuario o contraseña incorrectos");      
-          }
-          
-        })
+  return null;
 
+}
+
+  var elProxy = new LogicaFake()
+
+  function iniciarSesionOnLoad() {
+
+    console.log(readCookie("usuario"));
+    console.log(readCookie("password"));
+
+    elProxy.iniciarSesion({
+      usuario: readCookie("usuario"),
+      password: readCookie("password")
+    }, function(res) {
+      if(res){
+        console.log("Iniciar sesion on load:" + res);
+        window.location = "./admin.html";
       }
-    
+    })
+  }
+</script>
+
+<body class="login-img3-body" onload="iniciarSesionOnLoad()">
+
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script>
+    function iniciarSesionHTML() {
+
+      var usuarioHTML = document.getElementById("usuario").value;
+      var passwordHTML = document.getElementById("password").value;
+      var recuerdame = document.getElementById("recuerdame").checked;
+
+      console.log("El recuerdame esta: " + recuerdame);
+
+      elProxy.iniciarSesion({
+        usuario: usuarioHTML,
+        password: passwordHTML
+      }, function(res) {
+        console.log(res);
+        if (res && recuerdame) {
+          swal("Correcto!", "Bienvenido " + usuarioHTML, "success")
+          setTimeout(function() {
+            document.cookie = "usuario=" + usuarioHTML +";"
+            document.cookie = "password=" + passwordHTML + ";"
+            window.location = "./admin.html";
+          }, 2000)
+
+        }
+
+        if (res && !recuerdame) {
+          swal("Correcto!", "Bienvenido " + usuarioHTML, "success")
+          setTimeout(function() {
+            window.location = "./admin.html";
+          }, 2000)
+
+
+        }
+
+        if (!res) {
+          console.log("Usuario o contraseña incorrectos");
+          swal("Usuario incorrecto", "nombre de usuario y/o contraseña incorrectos", "error")
+        }
+
+      })
+
+    }
   </script>
-  
+
 
   <div class="container">
     <form class="login-form">
       <div class="login-wrap">
-        
-        <img class="imagen-login" src="./img/robot.svg"  width=40%;>
-    
+
+        <img class="imagen-login" src="./img/robot.svg" width=40%;>
+
         <h1 class="text-center" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">SecureBot</h1>
         <div class="input-group">
           <span class="input-group-addon"><i class="icon_profile"></i></span>
-          <input id="usuario" type="text" class="form-control" placeholder="Usuario" autofocus >
+          <input id="usuario" type="text" class="form-control" placeholder="Usuario" autofocus>
         </div>
         <div class="input-group">
           <span class="input-group-addon"><i class="icon_key_alt"></i></span>
-          <input id="password" type="password" class="form-control" placeholder="Contraseña" >
+          <input id="password" type="password" class="form-control" placeholder="Contraseña">
         </div>
         <label class="checkbox" class="text-center">
-                <input type="checkbox" id="recuerdame"> Recuérdame
-                <span class="pull-right"> <a href="#"> ¿Olvidaste la contraseña?</a></span>
-            </label>
+          <input type="checkbox" id="recuerdame"> Recuérdame
+          <span class="pull-right"> <a href="#"> ¿Olvidaste la contraseña?</a></span>
+        </label>
         <span class="btn btn-primary btn-lg btn-block" onclick="iniciarSesionHTML()">Iniciar Sesión</span>
       </div>
     </form>
     <div class="text-right">
       <div class="credits">
-          <!--
+        <!--
             All the links in the footer should remain intact.
             You can delete the links only if you purchased the pro version.
             Licensing information: https://bootstrapmade.com/license/
             Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
           -->
-          Designed by <a href="https://trello.com/b/jB5qaoC6/dreamteam-3b">DreamTeam</a>
-        </div>
+        Designed by <a href="https://trello.com/b/jB5qaoC6/dreamteam-3b">DreamTeam</a>
+      </div>
     </div>
   </div>
 
