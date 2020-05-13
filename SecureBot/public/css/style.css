@@ -156,7 +156,7 @@ table tr th { color: #688a7e;}
 
 .login-img-body{
 
-  background: url('../img/bg-1.jpg') no-repeat center center fixed;
+  background: url('../img/tb2_background.png') no-repeat center center fixed;
 
   -webkit-background-size: cover;
 
@@ -190,7 +190,7 @@ table tr th { color: #688a7e;}
 
 .login-img3-body{
 
-  background: url('../img/bg-1.jpg') no-repeat center center fixed;
+  background: url('../img/tb2_background.png') no-repeat center center fixed;
 
   -webkit-background-size: cover;
 
@@ -1104,6 +1104,11 @@ a.logo span {
 
 }
 
+.logo-img{
+    float: right;
+    width: 2em;
+    padding-left: 5px;
+}
 
 
 
