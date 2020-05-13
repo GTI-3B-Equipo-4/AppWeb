@@ -17,7 +17,6 @@ let vueApp = new Vue({
         interval:null,
         loading:false,
         bateria: null,
-        lugar: null,
         logs:[],
         // page content
         menu_title: 'Connection',
@@ -25,6 +24,7 @@ let vueApp = new Vue({
         service_busy: false,
         param_val: 0,
         level_battery: 100,
+        lugar: '',
         param_read_val: 0,
         service_response: '',
     },
@@ -109,6 +109,21 @@ let vueApp = new Vue({
 		    service_busy = false
 		    console.log('Reading param')
         },
+        set_place: function(value){
+		    //set service busy
+		    service_busy = true
+		    let web_param = new ROSLIB.Param({
+		        ros: this.ros,
+		        name: 'web_param'
+            })
+            //if you need collect from the web
+            //web_param.set(this.param_val)
+            //web_param.set(value)
+            this.lugar = value
+            console.log(value)
+		    service_busy = false
+		    console.log('Param for place')
+        },
         callMachineState: function(){
             this.service_busy = true
             this.service_response = ''
@@ -122,13 +137,13 @@ let vueApp = new Vue({
             let request = new ROSLIB.ServiceRequest({
                 on: this.param_val,
                 battery: this.level_battery,
-                lugar: this.lugar
+                lugar: this.lugar,
             })
             //define a callback
             service.callService(request, (result) => {
                 this.service_busy = false
                 this.service_response = JSON.stringify(result.success)
-                //console.log(this.service_response)
+                console.log(this.service_response)
             }, (error) => {
                 this.service_busy = false
                 if(error){

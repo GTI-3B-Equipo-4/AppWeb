@@ -128,6 +128,8 @@
     function reposo(){
       document.getElementById("repose-on").click(); // Click on the checkbox
     }
+    
+
   </script>
 
   <script>
@@ -332,8 +334,9 @@
                   <!-- Botones para las acciones con la maquina de estados: simular la bateria del robot. -->
                   <button id="battery_low" class="btn btn-danger" :disabled="loading || !connected || service_busy" @click="set_battery(20); callMachineState();" style="display: none;">Cargando</button>
                   <button id="repose-on" class="btn btn-warning" :disabled="loading || !connected || service_busy" @click="set_param(1); callMachineState();" style="display: none;">Repose ON</button>
-                  <button id="repose-off" class="btn btn-warning" :disabled="loading || !connected || service_busy" @click="set_param(0); callMachineState();" style="display: none;">Repose OFF</button>
-                  <button id="battery_high" class="btn btn-success" :disabled="loading || !connected || service_busy" @click="set_battery(100); callMachineState();" style="display: none;">PATRULLANDO</button>
+                  <button id="repose-off" class="btn btn-warning" :disabled="loading || !connected || service_busy" @click="set_param(0); set_place('Almacen'); callMachineState();" style="display: none;">Repose OFF</button>
+                  <button id="battery_high" class="btn btn-success" :disabled="loading || !connected || service_busy" @click="set_place('Almacen'); callMachineState();" style="display: none;">GO ALMACEN</button>
+                  <button id="go_garita" class="btn btn-success" :disabled="loading || !connected || service_busy" @click="set_place('Garita'); callMachineState();" style="display: none;">GO GARITA</button>
                   <!-- Tabla que contiene el registro de robots -->
                   <table class="table bootstrap-datatable countries">
                     <thead>
@@ -349,7 +352,7 @@
                         <tr>
                         <!-- Robot 1 -->
                           <td>01</td>
-                          <td>Sala1</td>
+                          <td>Almacen</td>
                           <td> Si</td>
                           <td>
                             <!-- Switch del robot 1 -->
@@ -358,6 +361,7 @@
                                 <span class="switch-label" data-on="P" data-off="R"></span> 
                                 <span class="switch-handle"></span> 
                               </label>
+                              <p> {{ service_response }}</p>
                           </td>
                           <td>
                             <!-- Progres bar robot 1 -->
@@ -370,7 +374,7 @@
                         
                         <!-- Robot 2 -->
                         <td>02</td>
-                        <td>Almacen2</td>
+                        <td>Tienda</td>
                         <td> Si</td>
                         <td>
                           <!-- Switch del robot 2 -->
@@ -391,7 +395,7 @@
                         
                         <!-- Robot 3 -->
                         <td>03</td>
-                        <td>Sala2</td>
+                        <td>Oficina</td>
                         <td> Si</td>
                         <td>
                           <!-- Switch del robot 3 -->
@@ -414,7 +418,7 @@
                       <tr>
                         <!-- Robot 4 -->
                         <td>04</td>
-                        <td>Almacen1</td>
+                        <td>Sala seguridad</td>
                         <td> Si</td>
                         <td>
                           <!-- Switch del robot 4 -->

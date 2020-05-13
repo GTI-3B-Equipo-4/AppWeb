@@ -13,7 +13,7 @@
     "cors": "^2.8.5",
     "express": "*",
     "request": "*",
-    "sqlite3": "*"
+    "sqlite3": "^4.2.0"
   },
   "devDependencies": {
     "mocha": "*"
