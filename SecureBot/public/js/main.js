@@ -17,6 +17,7 @@ let vueApp = new Vue({
         interval:null,
         loading:false,
         bateria: null,
+        lugar: null,
         logs:[],
         // page content
         menu_title: 'Connection',
@@ -121,6 +122,7 @@ let vueApp = new Vue({
             let request = new ROSLIB.ServiceRequest({
                 on: this.param_val,
                 battery: this.level_battery,
+                lugar: this.lugar
             })
             //define a callback
             service.callService(request, (result) => {
@@ -135,7 +137,41 @@ let vueApp = new Vue({
             })
             
         },
+        //
+        crearAlertaIntruso: function () {
 
+            if (!("Notification" in window)) {
+    
+                alert("Este navegador no soporta las notificaciones");
+      
+            }
+            else if (Notification.permission === "granted") {
+
+                var notificacion = new Notification("SecureBot",
+
+                {
+    
+                    icon: "./img/robot.svg",
+    
+                    body: "Hay un intruso en:" + this.lugar, 
+
+                    timestamp: Math.floor(Date.now())
+    
+                } )
+            
+            }  
+            else if (Notification.permission !== 'denied') {
+                
+                Notification.requestPermission(function (permission) {
+
+                    if (permission === "granted") {
+                    var notification = new Notification(texto);
+                    }
+
+                });
+
+            }
+        },
         getBateria: function(){
 
             return this.level_battery
@@ -145,62 +181,57 @@ let vueApp = new Vue({
         
             if (!("Notification" in window)) {
     
-              alert("Este navegador no soporta las notificaciones");
+                alert("Este navegador no soporta las notificaciones");
     
             }
            
-           else if (Notification.permission === "granted") {
+            else if (Notification.permission === "granted") {
 
-             
+                if(this.level_battery <= 50 ){
 
-            if(this.level_battery <= 50 ){
+                    var notificacion = new Notification("SecureBot",
 
-                var notificacion = new Notification("SecureBot",
+                    {
+        
+                        icon: "./img/robot.svg",
+        
+                        body: "El nivel de la bateria es baja :" + this.level_battery, 
 
-                {
+                        timestamp: Math.floor(Date.now())
+        
+                    } )
     
-                    icon: "./img/robot.svg",
-    
-                    body: "El nivel de la bateria es baja :" + this.level_battery, 
-
-                    timestamp: Math.floor(Date.now())
-    
-                } )
-   
-                this.set_battery(100) 
-            }
-            
-            else{
+                    this.set_battery(100) 
+                }
                 
-                var notificacion = new Notification("SecureBot",
+                else{
+                    
+                    var notificacion = new Notification("SecureBot",
 
-                {
-    
-                    icon: "./img/robot.svg",
-    
-                    body: "El nivel de la bateria es alta :"+ this.level_battery, 
+                    {
+        
+                        icon: "./img/robot.svg",
+        
+                        body: "El nivel de la bateria es alta :"+ this.level_battery, 
 
-                    timestamp: Math.floor(Date.now())
-    
-                } )
+                        timestamp: Math.floor(Date.now())
+        
+                    } )
 
-            }
+                }
                           
             }  
-            
+            else if (Notification.permission !== 'denied') {
+
+                Notification.requestPermission(function (permission) {
 
 
-           else if (Notification.permission !== 'denied') {
-
-             Notification.requestPermission(function (permission) {
-
-
-               
-              
-                if (permission === "granted") {
-                  var notification = new Notification(texto);
-                }
-              });
+                
+                
+                    if (permission === "granted") {
+                    var notification = new Notification(texto);
+                    }
+                });
             }
           
         },
