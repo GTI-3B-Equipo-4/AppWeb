@@ -1,7 +1,8 @@
-var ip_host = "http://localhost:8080"
+var IP_PUERTO = "http://localhost:8080"
+
 class LogicaFake {
 
-  constructor( ){
+  constructor() {
     console.log("Proxy creado")
   }
 
@@ -10,57 +11,45 @@ class LogicaFake {
   // --> iniciarSesion() -->
   // V/F
   //----------------------------------------------------------------------
-  iniciarSesion( datos, callback){
+  iniciarSesion(datos, callback) {
 
-    fetch(ip_host+"/iniciarSesion",{
-      method: 'POST', // or 'PUT'
-      body: JSON.stringify(datos), // data can be `string` or {object}!
-      headers: {
-      'User-Agent': 'Emilio',
-      'Content-Type': 'application/json'
-      }
-    })
-    .then((res)=>{
-      return res.json();
-    })
-    .then((data)=>{
-      callback(data.laRespuesta)
-    })
-  }
-
-
-}
-
-
-
-/*class LogicaFake {
-
-      constructor( ){
-        console.log("Proxy creado")
-      }
-
-      //----------------------------------------------------------------------
-      // datos:JSON{usuario:Texto, password:Texto}
-      // --> iniciarSesion() -->
-      // V/F
-      //----------------------------------------------------------------------
-      iniciarSesion( datos, callback){
-
-        fetch("http://192.168.1.134:8080"+"/iniciarSesion",{
-          method: 'POST', // or 'PUT'
-          body: JSON.stringify(datos), // data can be `string` or {object}!
-          headers: {
+    fetch(IP_PUERTO + "/iniciarSesion", {
+        method: 'POST', // or 'PUT'
+        body: JSON.stringify(datos), // data can be `string` or {object}!
+        headers: {
           'User-Agent': 'Emilio',
           'Content-Type': 'application/json'
-          }
-        })
-        .then((res)=>{
-          return res.json();
-        })
-        .then((data)=>{
-          callback(data.laRespuesta)
-        })
-      }
-
+        }
+      })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        callback(data.laRespuesta)
+      })
   }
-*/
+
+  //----------------------------------------------------------------------------
+  // url:Texto, nombreArchivo:Texto -->
+  // descargarArchivo() -->
+  //----------------------------------------------------------------------------
+  descargarArchivo(url, nombreArchivo) {
+    fetch(url).then(function(t) {
+      return t.blob().then((b) => {
+        var a = document.createElement("a");
+        a.href = URL.createObjectURL(b);
+        a.setAttribute("download", nombreArchivo);
+        a.click();
+      });
+    });
+  }
+
+  //----------------------------------------------------------------------------
+  // nombre:Texto
+  // descargarMapa() -->
+  //----------------------------------------------------------------------------
+  descargarGrabacion(nombre) {
+    this.descargarArchivo(IP_PUERTO + "/grabaciones/" + nombre, nombre)
+  }
+
+}

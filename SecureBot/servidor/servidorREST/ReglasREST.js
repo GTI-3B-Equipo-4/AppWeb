@@ -3,36 +3,54 @@
 // .....................................................................
 
 const path = require('path')
+const fs = require('fs')
 
-module.exports.cargar = function( servidorExpress, laLogica ) {
-// .......................................................
-// GET /iniciarSesion
-// .......................................................
-servidorExpress.post('/iniciarSesion',
-   async function( peticion, respuesta ){
+module.exports.cargar = function(servidorExpress, laLogica) {
+  // .......................................................
+  // GET /iniciarSesion
+  // .......................................................
+  servidorExpress.post('/iniciarSesion',
+    async function(peticion, respuesta) {
 
-    console.log( "POST /iniciarSesion" )
-  
-    var datos = JSON.parse(peticion.body)
+      console.log("POST /iniciarSesion")
 
-    console.log(datos);
-    
-    var res = await laLogica.iniciarSesion(datos);
+      var datos = JSON.parse(peticion.body)
 
-    console.log("Iniciar sesion: " + res);
+      console.log(datos);
 
-    respuesta.send({laRespuesta: res})
+      var res = await laLogica.iniciarSesion(datos);
 
-}) // get /iniciarSesion
+      console.log("Iniciar sesion: " + res);
+
+      respuesta.send({
+        laRespuesta: res
+      })
+
+    }) // get /iniciarSesion
+
+  servidorExpress.get('/listaDeGrabaciones',
+    async function(peticion, respuesta) {
+
+      console.log("GET /listaDeGrabaciones")
+
+      var grabaciones = fs.readdirSync('../grabaciones');
+
+      respuesta.send({
+        laRespuesta: grabaciones
+      })
+
+    }) // get /listaDeGrabaciones
 
 
-servidorExpress.get('/prueba',
-    function( peticion, respuesta ){
+  //-----------------------------------------------------------------------------
+  // GET /ux/mapas/<mapa>
+  //-----------------------------------------------------------------------------
+  servidorExpress.get('/grabaciones/:grab', function(peticion, respuesta) {
+    console.log(" servint mapa: " + peticion.params.grab)
 
-    console.log("Funciona correctamente");
-    
-
-}) // get /iniciarSesion
+    var elPath = path.join(__dirname, '..', 'grabaciones');
+    respuesta.sendFile(elPath + "/" + peticion.params.grab);
+  });
 
 } // cargar()
 
