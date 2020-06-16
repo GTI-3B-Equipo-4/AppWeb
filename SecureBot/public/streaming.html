@@ -73,7 +73,7 @@
         <ul class="nav pull-right top-menu">
 
           <!-- task notificatoin start -->
-          
+
           <li id="alert_notificatoin_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
 
@@ -91,8 +91,8 @@
                                     Bateria baja robot1
                                     <span class="small italic pull-right">5 mins</span>
                                 </a>
-              </li>         
-              
+              </li>
+
             </ul>
           </li>
           <!-- alert notification end-->
@@ -121,7 +121,7 @@
         </ul>
         <!-- notification dropdown end-->
       </div>
-          
+
     </header>
     <!--header end-->
 
@@ -177,7 +177,7 @@
               <div id="app" class="row">
                 <div class="col-lg-9 col-md-12">
                   <div class="panel panel-default">
-                      
+
                       <div class="col-md-12 col-sm-6 text-center">
                         <h3>Connection status</h3>
                         <p class="text-danger" v-if="!connected">Not connected</p>
@@ -185,17 +185,17 @@
                         <br><br>
                         <button :disabled="loading" class="btn btn-danger" @click="disconnect"
                         v-if="connected">Disconnect!</button>
-      
+
                         <button :dissabled="loading" class="btn btn-success" @click="connect" v-else>Connect</button>
-                        
+
                       </div>
-                      
-                      
+
+
                     <div class="col-md-12 col-sm-6">
 
                       <div class="col-md-12 text-center my-2">
                         <div id="divCamera"></div>
-                    </div>  
+                    </div>
                     <div class="col-md-12 col-sm-6 btn-stream" style="overflow: auto;">
                       <!-- Botones control remoto -->
                       <div class= "col-md-12 text-center my-2 btn-stream">
@@ -212,34 +212,17 @@
                       <div class= "col-md-12 text-center my-2 btn-stream">
                       </div>
                     </div>
-        
-        
-                      
-                      
+
                     </div>
-      
+
                   </div>
                 </div>
-      
+
               </div>
-
-
-              
-
-              
-
-           
-
-
-            </section>
-            
-          
+            </section>          
           </div>
         </div>
         <!-- Basic Forms & Horizontal Forms-->
-
-        
-      
 
         <!-- page end-->
       </section>

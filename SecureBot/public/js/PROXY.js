@@ -52,4 +52,20 @@ class LogicaFake {
     this.descargarArchivo(IP_PUERTO + "/grabaciones/" + nombre, nombre)
   }
 
+  getListaDeGrabaciones(callback){
+    fetch(IP_PUERTO + "/listaDeGrabaciones", {
+        method: 'GET', // or 'PUT'
+        headers: {
+          'User-Agent': 'Emilio',
+          'Content-Type': 'application/json'
+        }
+      })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        callback(data.laRespuesta)
+      })
+  }
+
 }
