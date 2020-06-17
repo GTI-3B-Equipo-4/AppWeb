@@ -1109,7 +1109,10 @@ a.logo span {
     width: 2em;
     padding-left: 5px;
 }
-
+.logo-save{
+    float: left;
+    padding-right: 0.75em;
+}
 
 
 
