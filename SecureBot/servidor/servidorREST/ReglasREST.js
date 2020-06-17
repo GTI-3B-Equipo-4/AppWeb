@@ -46,7 +46,7 @@ module.exports.cargar = function(servidorExpress, laLogica) {
   // GET /ux/mapas/<mapa>
   //-----------------------------------------------------------------------------
   servidorExpress.get('/grabaciones/:grab', function(peticion, respuesta) {
-    console.log(" servint mapa: " + peticion.params.grab)
+    console.log(" servint grabació: " + peticion.params.grab)
 
     var elPath = path.join(__dirname, '..', 'grabaciones');
     respuesta.sendFile(elPath + "/" + peticion.params.grab);
