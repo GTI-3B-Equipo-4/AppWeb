@@ -9,7 +9,7 @@
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
 
-  <title>Home | SecureBot</title>
+  <title>Home | SecureBot></title>
 
   <!-- Bootstrap CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -31,12 +31,104 @@
   <link rel="stylesheet" href="css/fullcalendar.css">
   <link href="css/widgets.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
+  <link href="css/styleMachine.css" rel="stylesheet">
   <link href="css/style-responsive.css" rel="stylesheet" />
   <link href="css/xcharts.min.css" rel=" stylesheet">
   <link href="css/jquery-ui-1.10.4.min.css" rel="stylesheet">
+
+
+  <script type="text/javascript" src="https://static.robotwebtools.org/EaselJS/current/easeljs.min.js"></script>
+  <script type="text/javascript" src="https://static.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+  <script type="text/javascript" src="https://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+  <script type="text/javascript" src="https://static.robotwebtools.org/ros2djs/current/ros2d.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
 </head>
 
 <body>
+  <script>
+
+    function cerrarSesion(){
+      document.cookie = "usuario=;"
+      document.cookie = "password=;"
+      window.location = "./index.html"
+    }
+    
+    //Script para manejar switch de estados, de patrullando a reposo
+    document.addEventListener('DOMContentLoaded', function () {
+            //Switch del robot 1
+            var switch1 = document.getElementById('state_r_1');
+
+            switch1.addEventListener('change', function () {
+                if (switch1.checked) {
+                  // está patrullando
+                  patrullando()
+                  console.log('Patrullando modo ON!');
+                } else {
+                  // está en reposo
+                  reposo()
+                  console.log('Estamos en reposo...');
+                }
+            });
+            //Switch del robot 2
+            var switch2 = document.getElementById('state_r_2');
+
+            switch2.addEventListener('change', function () {
+                if (switch2.checked) {
+                  // está patrullando
+                  patrullando()
+                  console.log('Patrullando modo ON!');
+                } else {
+                  // está en reposo
+                  reposo()
+                  console.log('Estamos en reposo...');
+                }
+            });
+
+            //Switch del robot 3
+            var switch3 = document.getElementById('state_r_3');
+
+            switch3.addEventListener('change', function () {
+                if (switch3.checked) {
+                  // está patrullando
+                  patrullando()
+                  console.log('Patrullando modo ON!');
+                } else {
+                  // está en reposo
+                  reposo()
+                  console.log('Estamos en reposo...');
+                }
+            });
+
+            //Switch del robot 4
+            var switch4 = document.getElementById('state_r_4');
+
+            switch4.addEventListener('change', function () {
+                if (switch4.checked) {
+                  // está patrullando
+                  patrullando()
+                  console.log('Patrullando modo ON!');
+                } else {
+                  // está en reposo
+                  reposo()
+                  console.log('Estamos en reposo...');
+                }
+            });
+        });
+    //Función que llama a callMachineState
+    //así llamaremos a la máquina de estados
+    function patrullando(){
+      document.getElementById("repose-off").click(); // Click on the checkbox
+    }
+    //para entrar en reposo
+    function reposo(){
+      document.getElementById("repose-on").click(); // Click on the checkbox
+    }
+  </script>
+
+
   <!-- container section start -->
   <section id="container" class="">
 
@@ -47,7 +139,7 @@
       </div>
 
       <!--logo start-->
-      <a href="index.html" class="logo">Secure <span class="lite">Bot</span></a>
+      <a href="admin.html" class="logo">Secure <span class="lite">Bot</span><img class="logo-img" src="/img/robot.svg"></a>
       <!--logo end-->
 
 
@@ -59,23 +151,22 @@
           <li id="task_notificatoin_bar" class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <i class="icon-task-l"></i>
-                            <span class="badge bg-important">6</span>
+                            <span class="badge bg-important"></span>
                         </a>
             <ul class="dropdown-menu extended tasks-bar">
               <div class="notify-arrow notify-arrow-blue"></div>
               <li>
-                <p class="blue">You have 6 pending letter</p>
+                <p class="blue">Robots activados/desactivados</p>
               </li>
               <li>
                 <a href="#">
                   <div class="task-info">
-                    <div class="desc">Design PSD </div>
-                    <div class="percent">90%</div>
-                  </div>
-                  <div class="progress progress-striped">
-                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%">
-                      <span class="sr-only">90% Complete (success)</span>
-                    </div>
+                    <div class="desc">Sala 1 </div>
+                    <label id="toggle-connect" class="switch switch-flat">
+                      <input class="switch-input" type="checkbox" />
+                      <span class="switch-label" data-on="P" data-off="R"></span>
+                      <span class="switch-handle"></span>
+                    </label>
                   </div>
                 </a>
               </li>
@@ -83,59 +174,53 @@
                 <a href="#">
                   <div class="task-info">
                     <div class="desc">
-                      Project 1
+                     Almacen 2
                     </div>
-                    <div class="percent">30%</div>
-                  </div>
-                  <div class="progress progress-striped">
-                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
-                      <span class="sr-only">30% Complete (warning)</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div class="task-info">
-                    <div class="desc">Digital Marketing</div>
-                    <div class="percent">80%</div>
-                  </div>
-                  <div class="progress progress-striped">
-                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                      <span class="sr-only">80% Complete</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div class="task-info">
-                    <div class="desc">Logo Designing</div>
-                    <div class="percent">78%</div>
-                  </div>
-                  <div class="progress progress-striped">
-                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" style="width: 78%">
-                      <span class="sr-only">78% Complete (danger)</span>
-                    </div>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div class="task-info">
-                    <div class="desc">Mobile App</div>
-                    <div class="percent">50%</div>
-                  </div>
-                  <div class="progress progress-striped active">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
-                      <span class="sr-only">50% Complete</span>
-                    </div>
-                  </div>
+                        <!-- Switch del robot 2 -->
+                          <label id="toggle-connect" class="switch switch-flat">
+                            <input class="switch-input" type="checkbox" checked="true"/>
+                            <span class="switch-label" data-on="P" data-off="R"></span>
+                            <span class="switch-handle"></span>
+                          </label>
+                      </td>
 
+                  </div>
                 </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div class="task-info">
+                    <div class="desc">
+                     Sala 2
+                    </div>
+                        <!-- Switch del robot 2 -->
+                        <label id="toggle-connect" class="switch switch-flat">
+                          <input class="switch-input" type="checkbox" checked="true"/>
+                          <span class="switch-label" data-on="P" data-off="R"></span>
+                          <span class="switch-handle"></span>
+                        </label>
+                      </td>
+
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <div class="task-info">
+                    <div class="desc">Almacen 1 </div>
+                  </div>
+                  <label id="toggle-connect" class="switch switch-flat">
+                    <input class="switch-input" type="checkbox" checked="true"/>
+                    <span class="switch-label" data-on="P" data-off="R"></span>
+                    <span class="switch-handle"></span>
+                  </label>
+                </a>
+              </li>
+              <li>
+
               </li>
               <li class="external">
-                <a href="#">See All Tasks</a>
+               <!--<a href="#">See All Tasks</a>-->
               </li>
             </ul>
           </li>
@@ -280,7 +365,7 @@
                 <a href="documentation.html"><i class="icon_key_alt"></i> Documentation</a>
               </li>
               <li>
-                <a href="documentation.html"><i class="icon_key_alt"></i> Documentation</a>
+                <a onclick="cerrarSesion()"><i class="icon_key_alt"></i> Cerrar sesion</a>
               </li>
             </ul>
           </li>
@@ -297,7 +382,7 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu">
           <li class="active">
-            <a class="" href="home.html">
+            <a class="" href="admin.html">
                           <i class="icon_house_alt"></i>
                           <span>Informacion</span>
                       </a>
@@ -309,8 +394,7 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-              <li><a class="" href="form_component.html">Streaming#1</a></li>
-              <li><a class="" href="form_validation.html">Streaming#2</a></li>
+              <li><a class="" href="streaming.html">Streaming#1</a></li>
             </ul>
           </li>
 
@@ -335,181 +419,223 @@
         </div>
 
 
+        <div id="app">
+          <div class="row">
+            <div class="col-lg-9 col-md-12">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h2><i ></i><strong>Mapa Almacen</strong></h2>
+                  <div class="col-md-12 col-sm-6 text-center">
+                    <p class="text-danger" v-if="!connected">Not connected</p>
+                    <p class="text-succes" v-if="connected">Connected</p>
 
-        <div class="row">
-          <div class="col-lg-9 col-md-12">
 
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h2><i ></i><strong>Mapa Almacen</strong></h2>
-                <div class="panel-actions">
-                  <a href="index.html#" class="btn-setting"><i class="fa fa-rotate-right"></i></a>
-                  <a href="index.html#" class="btn-minimize"><i class="fa fa-chevron-up"></i></a>
-                  <a href="index.html#" class="btn-close"><i class="fa fa-times"></i></a>
+                  </div>
+
+
+                    <div class="col-md-12 text-center my-2" >
+                      <div id="map"></div>
+                      <button :disabled="loading" class="btn btn-danger" @click="disconnect"
+                      v-if="connected">Disconnect!</button>
+
+                      <button :dissabled="loading" class="btn btn-success" @click="connect" v-else>Connect</button>
+                    </div>
+
+
+
+
+
                 </div>
+
+
               </div>
-              <div class="panel-body-map">
-                <div class="mapa" >
-                  <img src="./img/tb3_house_map.jpg" alt="Mapa Almacen">
+            </div>
+
+          </div>
+
+
+          <!-- Today status end -->
+
+
+
+          <div class="row">
+            <div class="col-lg-9 col-md-12">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h2><i class="fa fa-flag-o red"></i><strong>Robots registrados</strong></h2>
+                  <div class="panel-actions">
+                    <a href="index.html#" class="btn-setting"><i class="fa fa-rotate-right"></i></a>
+                    <a href="index.html#" class="btn-minimize"><i class="fa fa-chevron-up"></i></a>
+                    <a href="index.html#" class="btn-close"><i class="fa fa-times"></i></a>
+                  </div>
                 </div>
-                
+                <div class="panel-body">
+                  <!-- Botones para las acciones con la maquina de estados: simular la bateria del robot. -->
+                  <button id="battery_low" class="btn btn-danger" :disabled="loading || !connected || service_busy" @click="set_battery(20); callMachineState();" style="display: none;">Cargando</button>
+                  <button id="repose-on" class="btn btn-warning" :disabled="loading || !connected || service_busy" @click="set_param(1); callMachineState();" style="display: none;">Repose ON</button>
+                  <button id="repose-off" class="btn btn-warning" :disabled="loading || !connected || service_busy" @click="set_param(0); callMachineState();" style="display: none;">Repose OFF</button>
+                  <button id="battery_high" class="btn btn-success" :disabled="loading || !connected || service_busy" @click="set_battery(100); callMachineState();" style="display: none;">PATRULLANDO</button>
+                  <!-- Tabla que contiene el registro de robots -->
+                  <table class="table bootstrap-datatable countries">
+                    <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>Localizacion</th>
+                          <th>Internet</th>
+                          <th>Estado</th>
+                          <th>Bateria</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <!-- Robot 1 -->
+                          <td>01</td>
+                          <td>Sala1</td>
+                          <td> Si</td>
+                          <td>
+                            <!-- Switch del robot 1 -->
+                              <label id="toggle-connect" class="switch switch-flat">
+                                <input id="state_r_1" class="switch-input" type="checkbox" />
+                                <span class="switch-label" data-on="P" data-off="R"></span>
+                                <span class="switch-handle"></span>
+                              </label>
+                          </td>
+                          <td>
+                            <!-- Progres bar robot 1 -->
+                            <div class="progress thin">
+                              <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">100%</div>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+
+                        <!-- Robot 2 -->
+                        <td>02</td>
+                        <td>Almacen2</td>
+                        <td> Si</td>
+                        <td>
+                          <!-- Switch del robot 2 -->
+                            <label id="toggle-connect" class="switch switch-flat">
+                              <input id="state_r_2" class="switch-input" type="checkbox" checked="true"/>
+                              <span class="switch-label" data-on="P" data-off="R"></span>
+                              <span class="switch-handle"></span>
+                            </label>
+                        </td>
+                        <td>
+                          <!-- Progres bar robot 2 -->
+                          <div class="progress thin">
+                            <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">50%</div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+
+                        <!-- Robot 3 -->
+                        <td>03</td>
+                        <td>Sala2</td>
+                        <td> Si</td>
+                        <td>
+                          <!-- Switch del robot 3 -->
+                            <label id="toggle-connect" class="switch switch-flat">
+                              <input id="state_r_3" class="switch-input" type="checkbox" checked="true"/>
+                              <span class="switch-label" data-on="P" data-off="R"></span>
+                              <span class="switch-handle"></span>
+                            </label>
+                        </td>
+                        <td>
+                          <!-- Progres bar robot 3 -->
+                          <div class="progress thin">
+                            <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">75%</div>
+                          </div>
+                          <span class="sr-only">93%</span>
+                        </td>
+
+
+                      </tr>
+                      <tr>
+                        <!-- Robot 4 -->
+                        <td>04</td>
+                        <td>Almacen1</td>
+                        <td> Si</td>
+                        <td>
+                          <!-- Switch del robot 4 -->
+                            <label id="toggle-connect" class="switch switch-flat">
+                              <input id="state_r_4" class="switch-input" type="checkbox" checked="true"/>
+                              <span class="switch-label" data-on="P" data-off="R"></span>
+                              <span class="switch-handle"></span>
+                            </label>
+                        </td>
+                        <td>
+                          <!-- Progres bar robot 4 -->
+                          <div class="progress thin">
+                            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                          </div>
+                          <span class="sr-only">20%</span>
+                        </td>
+
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+
               </div>
 
             </div>
+
           </div>
 
-        </div>
+          <!-- project team & activity start -->
+          <div class="row">
+            <div class="col-lg-9 col-md-12">
+              <!--Project Activity start-->
+              <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h2><i class="fa fa-flag-o red"></i><strong>Historial</strong></h2>
 
-
-        <!-- Today status end -->
-
-
-
-        <div class="row">
-          <div class="col-lg-9 col-md-12">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h2><i class="fa fa-flag-o red"></i><strong>Robots registrados</strong></h2>
-                <div class="panel-actions">
-                  <a href="index.html#" class="btn-setting"><i class="fa fa-rotate-right"></i></a>
-                  <a href="index.html#" class="btn-minimize"><i class="fa fa-chevron-up"></i></a>
-                  <a href="index.html#" class="btn-close"><i class="fa fa-times"></i></a>
-                </div>
-              </div>
+                  </div>
               <div class="panel-body">
                 <table class="table bootstrap-datatable countries">
                   <thead>
                     <tr>
+                      <th>Fecha</th>
                       <th>ID</th>
-                      <th>Localizacion</th>
-                      <th>Internet</th>
-                      <th>Estado</th>
-                      <th>Bateria</th>
+                      <th>Accion</th>
+                      <th>Inicio</th>
+                      <th>Duracion</th>
                     </tr>
                   </thead>
                   <tbody>
+
                     <tr>
-                    
+
+                      <td>11/03/2020</td>
                       <td>01</td>
-                      <td>Sala1</td>
-                      <td> Si</td>
-                      <td> <span class="badge bg-primary">Reposo</span></td>
-                      <td>
-                        <div class="progress thin">
-                          <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">100%</div>
-                        </div>
-                        <span class="sr-only">73%</span>
-                      </td>
-                      
-                      
-                    </tr>
-                    <tr>
-                      
+                      <td> <span class="badge bg-succes">Patrulla</span> </td>
+                      <td>18:00</td>
+                      <td>6h</td>
 
-                      <td>02</td>
-                      <td>Almacen2</td>
-                      <td> Si</td>
-                      <td> <span class="badge bg-success">Patrullando</span></td>
-                      <td>
-                        <div class="progress thin">
-                          <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">50%</div>
-                        </div>
-                      </td>
-                      
-                      
                     </tr>
-                    <tr>
-                      
 
-                      <td>03</td>
-                      <td>Sala2</td>
-                      <td> Si</td>
-                      <td> <span class="badge bg-success">Patrullando</span></td>
-                      <td>
-                        <div class="progress thin">
-                          <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">75%</div>
-                        </div>
-                        <span class="sr-only">93%</span>
-                      </td>
-                      
-                      
-                    </tr>
                     <tr>
-                      
-                      <td>04</td>
-                      <td>Almacen1</td>
-                      <td> Si</td>
-                      <td> <span class="badge bg-important">Cargando</span> </td>
-                      <td>
-                        <div class="progress thin">
-                          <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                        </div>
-                        <span class="sr-only">20%</span>
-                      </td>
-                                         
+
+                      <td>11/03/2020</td>
+                      <td>01</td>
+                      <td> <span class="badge bg-succes">Patrulla</span> </td>
+                      <td>18:00</td>
+                      <td>6h</td>
+
                     </tr>
 
                   </tbody>
                 </table>
               </div>
-
             </div>
-
-          </div>
-
-        </div>
-
-        <!-- project team & activity start -->
-        <div class="row">
-          <div class="col-lg-9 col-md-12">
-            <!--Project Activity start-->
-            <div class="panel panel-default">             
-                <div class="panel-heading">
-                  <h2><i class="fa fa-flag-o red"></i><strong>Historial</strong></h2>
-                  
-                </div>
-            <div class="panel-body">
-              <table class="table bootstrap-datatable countries">
-                <thead>
-                  <tr>
-                    <th>Fecha</th>
-                    <th>ID</th>
-                    <th>Accion</th>
-                    <th>Inicio</th>
-                    <th>Duracion</th>
-                  </tr>
-                </thead>
-                <tbody>
-
-                  <tr>
-                      
-                    <td>11/03/2020</td>
-                    <td>01</td>
-                    <td> <span class="badge bg-succes">Patrulla</span> </td>
-                    <td>18:00</td>
-                    <td>6h</td>
-                      
-                  </tr>
-
-                  <tr>
-                      
-                    <td>11/03/2020</td>
-                    <td>01</td>
-                    <td> <span class="badge bg-succes">Patrulla</span> </td>
-                    <td>18:00</td>
-                    <td>6h</td>
-                      
-                  </tr>
-
-                </tbody>
-              </table>
+              <!--Project Activity end-->
             </div>
-          </div>
-            <!--Project Activity end-->
-          </div>
         </div><br><br>
 
-
+        </div>
       </section>
     </section>
     <!--main content end-->
@@ -532,7 +658,7 @@
   <script src="assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
   <script src="js/owl.carousel.js"></script>
   <!-- jQuery full calendar -->
-  <<script src="js/fullcalendar.min.js"></script>
+  <script src="js/fullcalendar.min.js"></script>
     <!-- Full Google Calendar - Calendar -->
     <script src="assets/fullcalendar/fullcalendar/fullcalendar.js"></script>
     <!--script for this page only-->
@@ -544,6 +670,9 @@
 
     <!--custome script for all page-->
     <script src="js/scripts.js"></script>
+
+    <!--<script src="js/main.js"></script>-->
+    <script src="js/main.js"></script>
     <!-- custom script for this page-->
     <script src="js/sparkline-chart.js"></script>
     <script src="js/easy-pie-chart.js"></script>
@@ -557,7 +686,7 @@
     <script src="js/sparklines.js"></script>
     <script src="js/charts.js"></script>
     <script src="js/jquery.slimscroll.min.js"></script>
-    
+
 
 </body>
 

@@ -25,6 +25,7 @@ servidorExpress.post('/iniciarSesion',
 
 }) // get /iniciarSesion
 
+
 servidorExpress.get('/prueba',
     function( peticion, respuesta ){
 
